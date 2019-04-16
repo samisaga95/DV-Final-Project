@@ -43,7 +43,7 @@
 
       .columnLarge {
         float: left;
-        width: 55%;
+        width: 50%;
         padding: 10px;
         height: 430px; /* Should be removed. Only for demonstration */
       }
@@ -53,6 +53,42 @@
         content: "";
         display: table;
         clear: both;
+      }
+
+      table {
+        font: 14px sans-serif;
+        vertical-align: middle;
+        text-align: left;
+        border-collapse: collapse;
+      }
+
+      td,
+      th {
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+
+      tr.even {
+        background-color: whitesmoke;
+      }
+
+      td.chart {
+        background-color: white;
+      }
+
+      th {
+        padding-left: 10px;
+      }
+
+      th.total {
+        text-align: right;
+      }
+
+      td.data {
+        padding-left: 10px;
+      }
+      td.value {
+        text-align: right;
       }
     </style>
     <script src="http://d3js.org/d3.v3.js"></script>
@@ -69,7 +105,10 @@
       </div>
       <div class="columnLarge" style="background-color:#ccc;">
         <div id="dataset-picker"></div>
-        <div id="chart"></div>
+        <div>
+          <div class="columnLarge" id="chart"></div>
+          <div class="columnLarge" id="table"></div>
+        </div>
       </div>
     </div>
 
@@ -117,6 +156,7 @@
             };
           },
           function(error, data) {
+            //for color scale
             var colorScale = d3.scale
               .quantile()
               .domain([
@@ -150,7 +190,8 @@
               .attr("height", gridSize)
               .style("fill", function(d) {
                 return colorScale(d.value);
-              });
+              })
+              .on("click", click);
 
             cards
               .append("text")
@@ -163,10 +204,52 @@
               })
               .text(function(d) {
                 return d.value;
-              });
+              })
+              .on("click", click);
           }
         );
       };
+
+      function click(d) {
+        d3.select("#table")
+          .select("table")
+          .remove();
+
+        var data = [
+          ["Total Number of Reviews:", d.day],
+          ["Average of Reviews:", d.hour],
+          ["Rank (# of reviews):", (d.day - 1) * 5 + d.hour]
+        ];
+
+        var table = d3.select("#table").append("table");
+
+        var HeaderRow = table.append("tr");
+
+        HeaderRow.append("th").text(d.value);
+
+        var tr = table
+          .selectAll("tr.data")
+          .data(data)
+          .enter()
+          .append("tr")
+          .attr("class", "datarow");
+
+        d3.selectAll(".datarow")
+          .filter(":nth-child(even)")
+          .attr("class", "datarow even");
+
+        tr.append("td")
+          .attr("class", "data name")
+          .text(function(d) {
+            return d[0];
+          });
+
+        tr.append("td")
+          .attr("class", "data value")
+          .text(function(d) {
+            return d[1];
+          });
+      }
 
       heatmapChart(datasets[0]);
 
