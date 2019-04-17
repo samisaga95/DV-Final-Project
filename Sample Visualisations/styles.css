@@ -1,0 +1,130 @@
+
+  rect.bordered {
+    stroke: #e6e6e6;
+    stroke-width: 2px;
+  }
+
+  text.mono {
+    font-size: 9pt;
+    font-family: Consolas, courier;
+    fill: #aaa;
+  }
+
+  text.axis-workweek {
+    fill: #000;
+  }
+
+  text.axis-worktime {
+    fill: #000;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Create three equal columns that floats next to each other */
+  .columnSmall {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    height: 430px; /* Should be removed. Only for demonstration */
+  }
+
+  .columnMed {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 430px; /* Should be removed. Only for demonstration */
+  }
+
+  .columnLarge {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 430px; /* Should be removed. Only for demonstration */
+  }
+
+  /* Clear floats after the columns */
+  /*.row {
+    padding-left: 70px;
+    padding-right: 70px;
+  }*/
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  table {
+    font: 14px sans-serif;
+    vertical-align: middle;
+    text-align: left;
+    border-collapse: collapse;
+  }
+
+  td,
+  th {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  tr.even {
+    background-color: whitesmoke;
+  }
+
+  td.chart {
+    background-color: white;
+  }
+
+  th {
+    padding-left: 10px;
+  }
+
+  th.total {
+    text-align: right;
+  }
+
+  td.data {
+    padding-left: 10px;
+  }
+  td.value {
+    text-align: right;
+  }
+
+  .num_tiles {
+    width: 30px;
+    height: 30px;
+    background-color: #fb0;
+    color: #333;
+    font-size: 22px;
+    text-align: center;
+    line-height: 20px;
+    padding: 3px;
+    margin: 1.5px;
+    font-family: verdana;
+    vertical-align: center;
+    border: #333;
+  }
+
+  .inner_bar {
+    margin: 0 auto;
+    color: #333;
+    border-bottom: 1px;
+    height: 80px;
+    /*padding: 0;
+    background-color: #fb0;
+    margin-left: 70px;
+    margin-right: 70px;
+    margin-top: 0px;
+    margin-bottom: 0px;*/
+
+  }
+
+  .bar {
+    width: 100%;
+    background-color: #fb0;
+  }
+  .page-wrapper{
+    height: 100vh;
+  }

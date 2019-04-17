@@ -8,144 +8,38 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
-    <style>
-      rect.bordered {
-        stroke: #e6e6e6;
-        stroke-width: 2px;
-      }
-
-      text.mono {
-        font-size: 9pt;
-        font-family: Consolas, courier;
-        fill: #aaa;
-      }
-
-      text.axis-workweek {
-        fill: #000;
-      }
-
-      text.axis-worktime {
-        fill: #000;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      /* Create three equal columns that floats next to each other */
-      .columnSmall {
-        float: left;
-        width: 20%;
-        padding: 10px;
-        height: 430px; /* Should be removed. Only for demonstration */
-      }
-
-      .columnMed {
-        float: left;
-        width: 25%;
-        padding: 10px;
-        height: 430px; /* Should be removed. Only for demonstration */
-      }
-
-      .columnLarge {
-        float: left;
-        width: 50%;
-        padding: 10px;
-        height: 430px; /* Should be removed. Only for demonstration */
-      }
-
-      /* Clear floats after the columns */
-      .row {
-        padding-left: 70px;
-        padding-right: 70px;
-      }
-
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-
-      table {
-        font: 14px sans-serif;
-        vertical-align: middle;
-        text-align: left;
-        border-collapse: collapse;
-      }
-
-      td,
-      th {
-        padding-top: 2px;
-        padding-bottom: 2px;
-      }
-
-      tr.even {
-        background-color: whitesmoke;
-      }
-
-      td.chart {
-        background-color: white;
-      }
-
-      th {
-        padding-left: 10px;
-      }
-
-      th.total {
-        text-align: right;
-      }
-
-      td.data {
-        padding-left: 10px;
-      }
-      td.value {
-        text-align: right;
-      }
-
-      .num_tiles {
-        width: 30px;
-        height: 30px;
-        background-color: #fb0;
-        color: #333;
-        font-size: 22px;
-        text-align: center;
-        line-height: 20px;
-        padding: 3px;
-        margin: 1.5px;
-        font-family: verdana;
-        vertical-align: center;
-        border: #333;
-      }
-
-      .inner_bar {
-        margin: 0 auto;
-        background-color: #fb0;
-        padding: 0;
-        color: #333;
-        border-bottom: 1px;
-        margin-left: 70px;
-        margin-right: 70px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        height: 80px;
-      }
-
-      .bar {
-        width: 1440px;
-        height: 80px;
-        background-color: #eaaf05;
-      }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
     <script src="http://d3js.org/d3.v3.js"></script>
   </head>
   <body onload="incrementCount(1300000)">
     <div class="bar">
-      <div class="inner_bar">
+      <div class="inner_bar container">
         <a class="h1" href="#">Fixed top</a>
       </div>
     </div>
-
-    <div class="row">
+    <div class="container page-wrapper">
+      <div class="row">
+        <div class="col-sm-4" style="background-color:#aaa;">
+          <div id="display_div_id"></div>
+        </div>
+        <div class="col-sm-4" style="background-color:#aaa;">
+          <h2>Column 2</h2>
+          <p>Some text..</p>
+        </div>
+        <div class="col-sm-4" style="background-color:#ccc;">
+          <div id="dataset-picker"></div>
+          <div>
+            <div class="columnLarge" id="chart"></div>
+            <div class="columnLarge" id="table"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
       <div class="columnMed" style="background-color:#aaa;">
         <div id="display_div_id"></div>
       </div>
@@ -160,7 +54,7 @@
           <div class="columnLarge" id="table"></div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <script type="text/javascript">
       var margin = { top: 50, right: 0, bottom: 100, left: 30 },
@@ -181,8 +75,8 @@
           "#081d58"
         ], // alternatively colorbrewer.YlGnBu[9]
         datasets = [
-          "/Users/santoshkumaramisagadda/Desktop/Acads/DV/DV Final Project/Sample Visualisations/sampleData.tsv",
-          "/Users/santoshkumaramisagadda/Desktop/Acads/DV/DV Final Project/Sample Visualisations/sampleData2.tsv"
+          "./sampleData.tsv",
+          "./sampleData2.tsv"
         ];
 
       var svg = d3
