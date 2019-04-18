@@ -124,3 +124,12 @@ td.value {
   padding: 20px;
   background-color:#bbb;
 }
+.heat-map-hover{
+  padding-top: 50px;
+}
+.dataset-picker{
+  /*padding-left: 25px;*/
+}
+.dataset-button{
+  margin: 0 25px;
+}

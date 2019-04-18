@@ -32,10 +32,10 @@
           <p>Some text..</p>
         </div>
         <div class="col-sm-6 heat-map-wrapper">
-          <div id="dataset-picker"></div>
+          <div class="dataset-picker" id="dataset-picker"></div>
           <div class="row">
             <div class="col-sm-6" id="chart"></div>
-            <div class="col-sm-6" id="table"></div>
+            <div class="col-sm-6 heat-map-hover" id="table"></div>
           </div>
         </div>
       </div>
@@ -117,10 +117,12 @@
               .attr("class", "hour bordered")
               .attr("width", gridSize)
               .attr("height", gridSize)
+              .attr("cursor","pointer")
               .style("fill", function(d) {
                 return colorScale(d.value);
               })
-              .on("click", click);
+              //.on("click", click)
+              .on("mouseover", click);
 
             cards
               .append("text")
@@ -131,10 +133,12 @@
               .attr("y", function(d) {
                 return d.day * gridSize - (gridSize / 2 - 10);
               })
+              .attr("cursor","pointer")
               .text(function(d) {
                 return d.value;
               })
-              .on("click", click);
+              //.on("click", click)
+              .on("mouseover", click);
           }
         );
       };
