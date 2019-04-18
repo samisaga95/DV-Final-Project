@@ -1,130 +1,126 @@
+body{
+  background-color: #333;
+}
+rect.bordered {
+  stroke: #e6e6e6;
+  stroke-width: 2px;
+}
 
-  rect.bordered {
-    stroke: #e6e6e6;
-    stroke-width: 2px;
-  }
+text.mono {
+  font-size: 9pt;
+  font-family: Consolas, courier;
+  fill: #aaa;
+}
 
-  text.mono {
-    font-size: 9pt;
-    font-family: Consolas, courier;
-    fill: #aaa;
-  }
+text.axis-workweek {
+  fill: #000;
+}
 
-  text.axis-workweek {
-    fill: #000;
-  }
+text.axis-worktime {
+  fill: #000;
+}
 
-  text.axis-worktime {
-    fill: #000;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-  /* Create three equal columns that floats next to each other */
-  .columnSmall {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    height: 430px; /* Should be removed. Only for demonstration */
-  }
+table {
+  font: 14px sans-serif;
+  vertical-align: middle;
+  text-align: left;
+  border-collapse: collapse;
+}
 
-  .columnMed {
-    float: left;
-    width: 25%;
-    padding: 10px;
-    height: 430px; /* Should be removed. Only for demonstration */
-  }
+td,
+th {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+tr{
+  background-color: #aaa;
+}
 
-  .columnLarge {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: 430px; /* Should be removed. Only for demonstration */
-  }
+tr.even {
+  background-color: whitesmoke;
+}
 
-  /* Clear floats after the columns */
-  /*.row {
-    padding-left: 70px;
-    padding-right: 70px;
-  }*/
+td.chart {
+  background-color: white;
+}
 
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+th {
+  padding-left: 10px;
+}
 
-  table {
-    font: 14px sans-serif;
-    vertical-align: middle;
-    text-align: left;
-    border-collapse: collapse;
-  }
+th.total {
+  text-align: right;
+}
 
-  td,
-  th {
-    padding-top: 2px;
-    padding-bottom: 2px;
-  }
+td.data {
+  padding-left: 10px;
 
-  tr.even {
-    background-color: whitesmoke;
-  }
+}
+td.value {
+  text-align: right;
+}
 
-  td.chart {
-    background-color: white;
-  }
+.num_tiles {
+  width: 30px;
+  height: 30px;
+  background-color: #fb0;
+  color: #333;
+  font-size: 22px;
+  text-align: center;
+  line-height: 20px;
+  padding: 3px;
+  margin: 1.5px;
+  font-family: verdana;
+  vertical-align: center;
+  border: #333;
+}
 
-  th {
-    padding-left: 10px;
-  }
-
-  th.total {
-    text-align: right;
-  }
-
-  td.data {
-    padding-left: 10px;
-  }
-  td.value {
-    text-align: right;
-  }
-
-  .num_tiles {
-    width: 30px;
-    height: 30px;
-    background-color: #fb0;
-    color: #333;
-    font-size: 22px;
-    text-align: center;
-    line-height: 20px;
-    padding: 3px;
-    margin: 1.5px;
-    font-family: verdana;
-    vertical-align: center;
-    border: #333;
-  }
-
-  .inner_bar {
-    margin: 0 auto;
-    color: #333;
-    border-bottom: 1px;
-    height: 80px;
-    /*padding: 0;
-    background-color: #fb0;
-    margin-left: 70px;
-    margin-right: 70px;
-    margin-top: 0px;
-    margin-bottom: 0px;*/
-
-  }
-
-  .bar {
-    width: 100%;
-    background-color: #fb0;
-  }
-  .page-wrapper{
-    height: 100vh;
-  }
+.inner_bar {
+  margin: 0 auto;
+  color: #333;
+  border-bottom: 1px;
+  height: 80px;
+  width: 100%;
+  max-width: 1300px;
+}
+.logo{
+  height: 80px;
+  width: 150px;
+}
+.header-text{
+  height: 100%;
+  padding: 20px;
+  vertical-align: middle;
+}
+.bar {
+  width: 100%;
+  background-color: #fb0;
+}
+.page-wrapper{
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.heat-map-wrapper{
+  padding: 20px;
+  background-color: #444;
+}
+.first-column-wrapper{
+  padding: 20px;
+  background-color:#aaa;
+}
+.second-column-wrapper{
+  padding: 20px;
+  background-color:#bbb;
+}
