@@ -125,7 +125,6 @@
       bars
         .append("text")
         .attr("class", "label")
-        //y position of the label is halfway down the bar
         .attr("y", function(d) {
           return y(d.Category) + y.rangeBand() / 2 + 4;
         })
