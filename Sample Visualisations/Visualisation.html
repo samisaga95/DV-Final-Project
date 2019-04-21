@@ -26,21 +26,18 @@
       </div>
     </div>
     <div class="container page-wrapper">
+      <div class="row first-column-wrapper">
+        <div id="display_div_id"></div>
+      </div>
       <div class="row">
         <div
-          class="col-sm-2 first-column-wrapper"
-          style="background-color:#aaa;"
-        >
-          <div id="display_div_id"></div>
-        </div>
-        <div
-          class="col-sm-4 second-column-wrapper"
+          class="col-sm-5 second-column-wrapper"
           style="background-color:#bbb;"
         >
           <h3>Rating Distribution</h3>
           <div id="graphic"></div>
         </div>
-        <div class="col-sm-6 heat-map-wrapper">
+        <div class="col-sm-7 heat-map-wrapper">
           <div class="dataset-picker" id="dataset-picker"></div>
           <div class="row">
             <div class="col-sm-6" id="chart"></div>
@@ -186,7 +183,7 @@
           left: 20
         };
 
-        var width = 350 - margin.left - margin.right,
+        var width = 400 - margin.left - margin.right,
           height = 500 - margin.top - margin.bottom;
 
         d3.select("#graphic")
