@@ -31,6 +31,14 @@
         <div id="display_div_id"></div>
       </div>
       <div class="row">
+        <div class="col-sm-6 heat-map-wrapper">
+          <h3>Category</h3>
+          <div class="dataset-picker" id="dataset-picker"></div>
+          <div class="row">
+            <div class="col-sm-6" id="chart"></div>
+            <div class="col-sm-6 heat-map-hover" id="table"></div>
+          </div>
+        </div>
         <div
           class="col-sm-6 second-column-wrapper"
           style="background-color:#bbb;"
@@ -39,15 +47,8 @@
           <div class="set-picker" id="set-picker"></div>
           <div id="graphic"></div>
         </div>
-        <div class="col-sm-6 heat-map-wrapper">
-          <div class="dataset-picker" id="dataset-picker"></div>
-          <div class="row">
-            <div class="col-sm-6" id="chart"></div>
-            <div class="col-sm-6 heat-map-hover" id="table"></div>
-          </div>
-        </div>
       </div>
-      <h1>D3 Time Series Example</h1>
+      <h1>Time Series Data</h1>
       <div id="controllers"></div>
       <div id="Tchart"></div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -159,7 +160,6 @@
 
         var width = 600 - margin.left - margin.right,
           height = 300 - margin.top - margin.bottom;
-
 
         d3.select("#graphic")
           .select("svg")
@@ -310,7 +310,7 @@
         ];
 
         var charts = [["Total", chartData1], ["Percentage", chartData2]];
-
+        displayBarGraph(chartData1);
         var setpicker = d3
           .select("#set-picker")
           .selectAll(".dataset-button")
