@@ -14,6 +14,7 @@
 
     var arr = [],
       startDate = moment("2015-09-01");
+     var json = require('../Dataset/timeline_output.json');
     for (let i = 0; i < count; i++) {
       arr.push({
         date: startDate.format("YYYY-MM-DD"),

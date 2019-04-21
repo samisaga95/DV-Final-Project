@@ -154,3 +154,10 @@ td.value {
 .label {
   font-size: 13px;
 }
+.timeseries-wrapper{
+  background-color: #aaa;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
