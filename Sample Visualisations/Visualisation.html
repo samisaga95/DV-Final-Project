@@ -32,13 +32,13 @@
       </div>
       <div class="row">
         <div
-          class="col-sm-5 second-column-wrapper"
+          class="col-sm-6 second-column-wrapper"
           style="background-color:#bbb;"
         >
           <h3>Rating Distribution</h3>
           <div id="graphic"></div>
         </div>
-        <div class="col-sm-7 heat-map-wrapper">
+        <div class="col-sm-6 heat-map-wrapper">
           <div class="dataset-picker" id="dataset-picker"></div>
           <div class="row">
             <div class="col-sm-6" id="chart"></div>
@@ -58,7 +58,7 @@
     <script type="text/javascript">
       var margin = { top: 50, right: 0, bottom: 100, left: 30 },
         width = 960 - margin.left - margin.right,
-        height = 430 - margin.top - margin.bottom,
+        height = 300 - margin.top - margin.bottom,
         gridSize = Math.floor(width / 24),
         legendElementWidth = gridSize * 2,
         buckets = 10,
@@ -191,8 +191,8 @@
           left: 30
         };
 
-        var width = 350 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
+        var width = 600 - margin.left - margin.right,
+          height = 300 - margin.top - margin.bottom;
 
         d3.select("#graphic")
           .select("svg")
@@ -211,7 +211,7 @@
 
         var x = d3.scale
           .linear()
-          .range([0, width])
+          .range([0, width/2])
           .domain([
             0,
             d3.max(chartData, function(d) {
@@ -257,7 +257,7 @@
           .attr("height", y.rangeBand())
           .attr("x", 0)
           .attr("width", function(d) {
-            return x(d.Average)/2;
+            return x(d.Average) / 3;
           });
 
         //add a value label to the right of each bar
@@ -269,7 +269,7 @@
           })
           //x position is 3 pixels to the right of the bar
           .attr("x", function(d) {
-            return x(d.Average) + 3;
+            return x(d.Average) / 3 + 3;
           })
           .text(function(d) {
             return d.Average;
