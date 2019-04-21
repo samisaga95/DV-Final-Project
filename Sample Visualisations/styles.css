@@ -1,4 +1,4 @@
-body{
+body {
   background-color: #333;
 }
 rect.bordered {
@@ -42,7 +42,7 @@ th {
   padding-top: 2px;
   padding-bottom: 2px;
 }
-tr{
+tr {
   background-color: #aaa;
 }
 
@@ -64,7 +64,6 @@ th.total {
 
 td.data {
   padding-left: 10px;
-
 }
 td.value {
   text-align: right;
@@ -93,11 +92,11 @@ td.value {
   width: 100%;
   max-width: 1300px;
 }
-.logo{
+.logo {
   height: 80px;
   width: 150px;
 }
-.header-text{
+.header-text {
   height: 100%;
   padding: 20px;
   vertical-align: middle;
@@ -106,30 +105,48 @@ td.value {
   width: 100%;
   background-color: #fb0;
 }
-.page-wrapper{
+.page-wrapper {
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
   min-height: 100vh;
 }
-.heat-map-wrapper{
+.heat-map-wrapper {
   padding: 20px;
   background-color: #444;
 }
-.first-column-wrapper{
+.first-column-wrapper {
   padding: 20px;
-  background-color:#aaa;
+  background-color: #aaa;
 }
-.second-column-wrapper{
+.second-column-wrapper {
   padding: 20px;
-  background-color:#bbb;
+  background-color: #bbb;
 }
-.heat-map-hover{
+.heat-map-hover {
   padding-top: 50px;
 }
-.dataset-picker{
+.dataset-picker {
   /*padding-left: 25px;*/
 }
-.dataset-button{
+.dataset-button {
   margin: 0 25px;
+}
+
+.graph {
+  fill: #5f89ad;
+}
+
+.axis {
+  font-size: 13px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  display: none;
+}
+
+.label {
+  font-size: 13px;
 }
