@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="http://d3js.org/d3.v3.js"></script>
+  </head>
+  <body onload="incrementCount(1300000)">
+    <div class="bar">
+      <div class="inner_bar">
+        <img class="logo" src="./Amazon-Logo.jpg" />
+        <a class="header-text h1">Amazon Reviews Visualization</a>
+      </div>
+    </div>
+    <div class="container page-wrapper">
+      <div class="row first-column-wrapper">
+        <div id="display_div_id"></div>
+      </div>
+      <div class="row">
+        <div
+          class="col-sm-5 second-column-wrapper"
+          style="background-color:#bbb;"
+        >
+          <h3>Rating Distribution</h3>
+          <div id="graphic"></div>
+        </div>
+        <div class="col-sm-7 heat-map-wrapper">
+          <div class="dataset-picker" id="dataset-picker"></div>
+          <div class="row">
+            <div class="col-sm-6" id="chart"></div>
+            <div class="col-sm-6 heat-map-hover" id="table"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var margin = { top: 50, right: 0, bottom: 100, left: 30 },
+        width = 960 - margin.left - margin.right,
+        height = 430 - margin.top - margin.bottom,
+        gridSize = Math.floor(width / 24),
+        legendElementWidth = gridSize * 2,
+        buckets = 10,
+        colors = [
+          "#ffffd9",
+          "#edf8b1",
+          "#c7e9b4",
+          "#7fcdbb",
+          "#41b6c4",
+          "#1d91c0",
+          "#225ea8",
+          "#253494",
+          "#081d58"
+        ], // alternatively colorbrewer.YlGnBu[9]
+        dataset = [
+          ["Total", "./dataTotal.csv"],
+          ["Average", "./dataAverage.csv"],
+          ["Alphabetical","./dataName.csv"]
+        ];
+
+      var svg = d3
+        .select("#chart")
+        .append("svg")
+        .attr("width", (width + margin.left + margin.right) / 2)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      var heatmapChart = function(csvFile) {
+        svg.selectAll(".column").remove();
+
+        d3.csv(csvFile, function(error, data) {
+          //for color scale
+          var colorScale = d3.scale
+            .quantile()
+            .domain([
+              0,
+              buckets - 1,
+              d3.max(data, function(d) {
+                return d.average;
+              })
+            ])
+            .range(colors);
+
+          var cards = svg
+            .selectAll(".column")
+            .data(data, function(d) {
+              return d.row + ":" + d.column + ":" + d.department;
+            })
+            .enter();
+
+          cards
+            .append("rect")
+            .attr("x", function(d) {
+              return (d.column - 1) * gridSize;
+            })
+            .attr("y", function(d) {
+              return (d.row - 1) * gridSize;
+            })
+            .attr("rx", 4)
+            .attr("ry", 4)
+            .attr("class", "column bordered")
+            .attr("width", gridSize)
+            .attr("height", gridSize)
+            .attr("cursor", "pointer")
+            .style("fill", function(d) {
+              return colorScale(d.average);
+            })
+            //.on("click", click)
+            .on("mouseover", click);
+
+          cards
+            .append("text")
+            .attr("class", "column bordered")
+            .attr("x", function(d) {
+              return (d.column - 1) * gridSize + gridSize / 2 - 10;
+            })
+            .attr("y", function(d) {
+              return d.row * gridSize - (gridSize / 2 - 10);
+            })
+            .attr("cursor", "pointer")
+            .text(function(d) {
+              return d.dept;
+            })
+            //.on("click", click)
+            .on("mouseover", click);
+        });
+      };
+
+      function click(d) {
+        d3.select("#table")
+          .select("table")
+          .remove();
+
+        var data = [
+          ["Total Number of Reviews:", d.count],
+          ["Average of Reviews:", d.average],
+          ["Rank (total):", d.rank_total],
+          ["Rank (average):", d.rank_average]
+        ];
+
+        //Bar Chart
+        var chartData = [
+          {
+            Category: "5#",
+            Average: d.Star5
+          },
+          {
+            Category: "4#",
+            Average: d.Star4
+          },
+          {
+            Category: "3#",
+            Average: d.Star3
+          },
+          {
+            Category: "2#",
+            Average: d.Star2
+          },
+          {
+            Category: "1#",
+            Average: d.Star1
+          }
+        ];
+
+        var margin = {
+          top: 15,
+          right: 20,
+          bottom: 15,
+          left: 20
+        };
+
+        var width = 400 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+        d3.select("#graphic")
+          .select("svg")
+          .remove();
+
+        var svg = d3
+          .select("#graphic")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          );
+
+        var x = d3.scale
+          .linear()
+          .range([0, width])
+          .domain([
+            0,
+            d3.max(chartData, function(d) {
+              return d.Average;
+            })
+          ]);
+
+        var y = d3.scale
+          .ordinal()
+          .rangeRoundBands([100, 0], 0.25)
+          .domain(
+            chartData.map(function(d) {
+              return d.Category;
+            })
+          );
+
+        //make y axis to show bar names
+        var yAxis = d3.svg
+          .axis()
+          .scale(y)
+          //no tick marks
+          .tickSize(0)
+          .orient("left");
+
+        var gy = svg
+          .append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
+
+        var bars = svg
+          .selectAll(".graph")
+          .data(chartData)
+          .enter()
+          .append("g");
+
+        //append rects
+        bars
+          .append("rect")
+          .attr("class", "graph")
+          .attr("y", function(d) {
+            return y(d.Category);
+          })
+          .attr("height", y.rangeBand())
+          .attr("x", 0)
+          .attr("width", function(d) {
+            return x(d.Average);
+          });
+
+        //add a value label to the right of each bar
+        bars
+          .append("text")
+          .attr("class", "label")
+          .attr("y", function(d) {
+            return y(d.Category) + y.rangeBand() / 2 + 4;
+          })
+          //x position is 3 pixels to the right of the bar
+          .attr("x", function(d) {
+            return x(d.Average) + 3;
+          })
+          .text(function(d) {
+            return d.Average;
+          });
+
+        //Table
+        var table = d3.select("#table").append("table");
+
+        var HeaderRow = table.append("tr");
+
+        HeaderRow.append("th").text(d.department);
+
+        var tr = table
+          .selectAll("tr.data")
+          .data(data)
+          .enter()
+          .append("tr")
+          .attr("class", "datarow");
+
+        d3.selectAll(".datarow")
+          .filter(":nth-child(even)")
+          .attr("class", "datarow even");
+
+        tr.append("td")
+          .attr("class", "data name")
+          .text(function(d) {
+            return d[0];
+          });
+
+        tr.append("td")
+          .attr("class", "data value")
+          .text(function(d) {
+            return d[1];
+          });
+      }
+
+      heatmapChart(dataset[0][1]);
+
+      var datasetpicker = d3
+        .select("#dataset-picker")
+        .selectAll(".dataset-button")
+        .data(dataset);
+
+      datasetpicker
+        .enter()
+        .append("input")
+        .attr("value", function(d) {
+          return d[0];
+        })
+        .attr("type", "button")
+        .attr("class", "dataset-button")
+        .on("click", function(d) {
+          heatmapChart(d[1]);
+        });
+    </script>
+
+    <script>
+      var display_str = "";
+      var display_div = document.getElementById("display_div_id");
+
+      function incrementCount(current_count) {
+        // clear count
+        while (display_div.hasChildNodes()) {
+          display_div.removeChild(display_div.lastChild);
+        }
+
+        display_str = current_count.toString();
+
+        for (var i = 0; i < display_str.length; i++) {
+          var new_span = document.createElement("span");
+          new_span.className = "num_tiles";
+          new_span.innerText = display_str[i];
+          display_div.appendChild(new_span);
+        }
+      }
+    </script>
+  </body>
+</html>

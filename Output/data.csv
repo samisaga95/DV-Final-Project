@@ -1,0 +1,4 @@
+row,column,dept,department,Star5,Star4,Star3,Star2,Star1,count,average,rank_total,rank_average
+1,1,MnT,Movies_and_TV,906608,382994,201302,102410,104219,1697533,4.110648217148062,,
+1,2,DM,Digital_Music,35580,16536,6789,3010,2791,64706,4.22251414088338,,
+2,1,IV,Amazon_Instant_Video,20890,8446,4187,1885,1718,37126,4.209529709637451,,
