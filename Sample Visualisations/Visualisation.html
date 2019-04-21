@@ -31,29 +31,31 @@
         <div id="display_div_id"></div>
       </div>
       <div class="row">
-        <div
-          class="col-sm-6 second-column-wrapper"
-          style="background-color:#bbb;"
-        >
-          <h3>Rating Distribution</h3>
-          <div class="set-picker" id="set-picker"></div>
-          <div id="graphic"></div>
-        </div>
         <div class="col-sm-6 heat-map-wrapper">
+          <h3>Category</h3>
           <div class="dataset-picker" id="dataset-picker"></div>
           <div class="row">
             <div class="col-sm-6" id="chart"></div>
             <div class="col-sm-6 heat-map-hover" id="table"></div>
           </div>
         </div>
+        <div class="col-sm-6 second-column-wrapper">
+          <h3>Rating Distribution</h3>
+          <div class="set-picker" id="set-picker"></div>
+          <div id="graphic"></div>
+        </div>
       </div>
-      <h1>D3 Time Series Example</h1>
-      <div id="controllers"></div>
-      <div id="Tchart"></div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
-      <script src="./script.js"></script>
+      <div class="row">
+        <div class="timeseries-wrapper">
+          <h3>Time series data</h3>
+          <div id="controllers"></div>
+          <div id="Tchart"></div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+          <script src="./script.js"></script>
+        </div>
+      </div>
     </div>
 
     <script type="text/javascript">
