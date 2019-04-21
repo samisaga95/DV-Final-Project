@@ -1,0 +1,79 @@
+/* GENERAL STYLING */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Raleway:200|Ubuntu:300,400,500);
+
+.text-primary { color: rgba(0,0,0, 0.8); }
+.text-secondary { color: rgba(0,0,0, 0.65); }
+.text-muted { color: rgba(0,0,0, 0.45); }
+
+html,body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0; padding: 0 0.5em;
+  font-weight: 400;
+  font-size: 14px;
+  background: #fff;
+  .text-primary;
+}
+
+
+h1, h2, h3 {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+  margin: 0.2em 0 0.5em 0;
+}
+
+h1 {
+  font-size: 3em;
+  color: #000;
+}
+h2 {
+  font-size: 2em;
+  color: #222;
+}
+h3 {
+  font-size: 1.5em;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: rgba(0,0,200, 0.7);
+}
+
+p {
+  margin: 1.5em 0;
+}
+
+.chart-wrapper {
+  border: solid 1px #ccc;
+  .chart {
+    border: solid 1px red;
+  }
+}
+.x-axis {
+
+  path,
+  line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  text {
+    font: 10px sans-serif;
+  }
+}
+
+.controllers {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  .control {
+    label {
+      font-weight: bold;
+    }
+    input[type="range"] {
+
+    }
+  }
+}

@@ -16,6 +16,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./bar_style.css" />
     <script src="http://d3js.org/d3.v3.js"></script>
   </head>
   <body onload="incrementCount(1300000)">
@@ -45,6 +46,13 @@
           </div>
         </div>
       </div>
+      <h1>D3 Time Series Example</h1>
+      <div id="controllers"></div>
+      <div id="Tchart"></div>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js'></script>
+      <script src='./script.js'></script>
     </div>
 
     <script type="text/javascript">
@@ -180,10 +188,10 @@
           top: 15,
           right: 20,
           bottom: 15,
-          left: 20
+          left: 30
         };
 
-        var width = 400 - margin.left - margin.right,
+        var width = 350 - margin.left - margin.right,
           height = 500 - margin.top - margin.bottom;
 
         d3.select("#graphic")
@@ -249,7 +257,7 @@
           .attr("height", y.rangeBand())
           .attr("x", 0)
           .attr("width", function(d) {
-            return x(d.Average);
+            return x(d.Average)/2;
           });
 
         //add a value label to the right of each bar

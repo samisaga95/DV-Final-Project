@@ -94,7 +94,7 @@
       .attr('transform', 'translate(' + settings.margins.left + ',' + settings.margins.top + ')');
 
     // Add a group for each column.
-    var valgroup = chart.selectAll("g.valgroup")
+    var valgroup = Tchart.selectAll("g.valgroup")
       .data(stacked)
       .enter().append("g")
       .attr("class", "valgroup")
