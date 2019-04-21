@@ -14,7 +14,6 @@
 
     var arr = [],
       startDate = moment("2015-09-01");
-     var json = require('../Dataset/timeline_output.json');
     for (let i = 0; i < count; i++) {
       arr.push({
         date: startDate.format("YYYY-MM-DD"),
@@ -95,7 +94,7 @@
       .attr('transform', 'translate(' + settings.margins.left + ',' + settings.margins.top + ')');
 
     // Add a group for each column.
-    var valgroup = chart.selectAll("g.valgroup")
+    var valgroup = Tchart.selectAll("g.valgroup")
       .data(stacked)
       .enter().append("g")
       .attr("class", "valgroup")
