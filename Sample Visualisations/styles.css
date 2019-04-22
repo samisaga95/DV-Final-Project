@@ -173,6 +173,16 @@ td.value {
 .back-trans{
   background: transparent;
 }
+.highlight:nth-child(2){
+  background-color: #fb0;
+  outline: none;
+  border: none;
+}
+.highlight2:first-child{
+  background-color: #fb0;
+  outline: none;
+  border: none;
+}
 
 text {
   font: 15px sans-serif;
