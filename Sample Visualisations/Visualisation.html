@@ -250,7 +250,11 @@
           .attr("height", y.rangeBand() * 2)
           .attr("x", 0)
           .attr("width", function(d) {
-            return x(d.Average) / 3;
+            if (selected == "Total") {
+              return x(d.Average) / 10;
+            }else {
+              return x(d.Average);
+            }
           });
 
         //add a value label to the right of each bar
@@ -262,7 +266,11 @@
           })
           //x position is 3 pixels to the right of the bar
           .attr("x", function(d) {
-            return x(d.Average) / 3 + 3;
+            if (selected == "Total") {
+              return x(d.Average) / 10 + 3;
+            }else{
+              return x(d.Average) + 3;
+            }
           })
           .text(function(d) {
             return d.Average;
