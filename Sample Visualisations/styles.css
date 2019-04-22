@@ -172,3 +172,11 @@ td.value {
 .back-trans{
   background: transparent;
 }
+
+text {
+  font: 15px sans-serif;
+}
+circle {
+    stroke: #565352;
+    stroke-width: 1;
+}
