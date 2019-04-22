@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $.getScript( "https://d3js.org/d3.v5.min.js", function( data, textStatus, jqxhr ) {
   var overViewDataset = {};
   var margin = { top: 50, right: 50, bottom: 50, left: 50 };
   var width = $(".container").width();
@@ -155,3 +156,4 @@ $(document).ready(function() {
       .attr("fill", "black");
   }
 });
+  });
