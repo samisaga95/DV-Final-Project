@@ -366,12 +366,13 @@
             return d[0];
           })
           .attr("type", "button")
-          .attr("class", "dataset-button")
+          .attr("class", "dataset-button highlight2")
           .on("click", function(d) {
             selected = d[0];
             displayBarGraph(d[1]);
             d3.select("#set-picker")
               .selectAll(".dataset-button")
+              .attr("class", "dataset-button")
               .attr("style", "deselected");
             d3.select(this).style("background-color", "#fb0");
             d3.select(this).style("border", "none");
@@ -410,7 +411,7 @@
           });
       }
 
-      heatmapChart(dataset[0][1]);
+      heatmapChart(dataset[1][1]);
 
       var datasetpicker = d3
         .select("#dataset-picker")
@@ -424,9 +425,16 @@
           return d[0];
         })
         .attr("type", "button")
-        .attr("class", "dataset-button")
+        .attr("class", "dataset-button highlight")
         .on("click", function(d) {
           heatmapChart(d[1]);
+          d3.select("#dataset-picker")
+            .selectAll(".dataset-button")
+            .attr("style", "deselected")
+            .attr("class","dataset-button");
+          d3.select(this).style("background-color", "#fb0");
+          d3.select(this).style("border", "none");
+          d3.select(this).style("outline", "none");
         });
     </script>
 
