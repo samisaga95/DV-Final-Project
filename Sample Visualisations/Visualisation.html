@@ -70,9 +70,8 @@
       var selected = "Total";
       var margin = { top: 50, right: 0, bottom: 100, left: 30 },
         width = 960 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom,
-        gridSize = Math.floor(width / 24),
-        legendElementWidth = gridSize * 2,
+        height = 600 - margin.top - margin.bottom,
+        gridSize = Math.floor(width / 13),
         buckets = 10,
         colors = [
           "#ffffd9",
@@ -94,8 +93,8 @@
       var svg = d3
         .select("#chart")
         .append("svg")
-        .attr("width", (width + margin.left + margin.right) / 2)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", gridSize * 16 + margin.left + margin.right)
+        .attr("height", gridSize * 6 + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -107,7 +106,9 @@
           var colorScale = d3.scale
             .quantile()
             .domain([
-              0,
+              d3.min(data, function(d) {
+                return d.average;
+              }),
               buckets - 1,
               d3.max(data, function(d) {
                 return d.average;
@@ -125,7 +126,7 @@
           cards
             .append("rect")
             .attr("x", function(d) {
-              return (d.column - 1) * gridSize;
+              return (d.column - 1) * gridSize * 1.5;
             })
             .attr("y", function(d) {
               return (d.row - 1) * gridSize;
@@ -133,7 +134,7 @@
             .attr("rx", 4)
             .attr("ry", 4)
             .attr("class", "column bordered")
-            .attr("width", gridSize)
+            .attr("width", gridSize * 1.5)
             .attr("height", gridSize)
             .attr("cursor", "pointer")
             .style("fill", function(d) {
@@ -146,14 +147,14 @@
             .append("text")
             .attr("class", "column bordered")
             .attr("x", function(d) {
-              return (d.column - 1) * gridSize + gridSize / 2 - 10;
+              return ((d.column - 1) * gridSize + gridSize / 2 - 25) * 1.5;
             })
             .attr("y", function(d) {
-              return d.row * gridSize - (gridSize / 2 - 10);
+              return d.row * gridSize - (gridSize / 2 - 8);
             })
             .attr("cursor", "pointer")
             .text(function(d) {
-              return d.dept;
+              return d.department.split("_")[0];
             })
             //.on("click", click)
             .on("click", click);
