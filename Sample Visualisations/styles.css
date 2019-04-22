@@ -161,3 +161,9 @@ td.value {
   text-align: center;
   padding: 20px;
 }
+.selected-tab{
+  background-color: #333;
+}
+.back-trans{
+  background: transparent;
+}
