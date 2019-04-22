@@ -224,14 +224,22 @@
           .enter()
           .append("g");
 
+          // double y axis translate
+          var transform;
+          d3.select("#graphic").select(".axis").selectAll(".tick").attr(
+            'transform', function(){
+            transform = d3.transform(d3.select(this).attr("transform"));
+            return "translate("+transform.translate[0]+"," + transform.translate[1] * 2 + ")";
+          });
+
         //append rects
         bars
           .append("rect")
           .attr("class", "graph")
           .attr("y", function(d) {
-            return y(d.Category);
+            return y(d.Category) * 2;
           })
-          .attr("height", y.rangeBand())
+          .attr("height", y.rangeBand() * 2)
           .attr("x", 0)
           .attr("width", function(d) {
             return x(d.Average) / 3;
@@ -242,7 +250,7 @@
           .append("text")
           .attr("class", "label")
           .attr("y", function(d) {
-            return y(d.Category) + y.rangeBand() / 2 + 4;
+            return y(d.Category) * 2 + y.rangeBand() / 2 + 12;
           })
           //x position is 3 pixels to the right of the bar
           .attr("x", function(d) {
@@ -345,7 +353,7 @@
             displayBarGraph(d[1]);
             d3.select("#set-picker")
               .selectAll(".dataset-button")
-              .attr("style", "back-trans");
+              .attr("style", "deselected");
             d3.select(this).style("background-color", "#fb0");
             d3.select(this).style("border", "none");
             d3.select(this).style("outline", "none");
