@@ -336,8 +336,10 @@
           .on("click", function(d) {
             selected = d[0];
             displayBarGraph(d[1]);
+            d3.select("#set-picker")
+            .selectAll(".dataset-button").attr("style","back-trans");
+            d3.select(this).style("background-color", "#fb0");
           });
-          console.log(selected);
 
         //Table
         var table = d3.select("#table").append("table");
