@@ -137,6 +137,10 @@ td.value {
 }
 .dataset-button {
   margin: 0 25px;
+  height: 35px;
+  width: 110px;
+  line-height: 35px;
+  border-radius: 4px;
 }
 .first-highlight{
   background-color: #fb0;
