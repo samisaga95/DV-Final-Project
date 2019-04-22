@@ -26,8 +26,11 @@
       </div>
     </div>
     <div class="container page-wrapper">
-      <div class="row first-column-wrapper">
-        <div id="display_div_id"></div>
+      <div class="row total-reviews-wrapper">
+        <div class="total-reviews">
+          <div class="total-numbers" id="display_div_id"></div>
+          <h4>Total Reviews:</h4>
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-6 heat-map-wrapper">
@@ -39,7 +42,7 @@
         </div>
 
         <div class="col-sm-6 second-column-wrapper">
-          <h3 style="padding: 10px 0;">Category Analysis</h3>
+          <h3 style="padding: 10px 15px;">Category Analysis</h3>
           <div class="col-sm-12 heat-map-hover" id="table"></div>
           <h3 class="heading">Rating Distribution</h3>
           <div class="set-picker" id="set-picker"></div>
@@ -315,19 +318,18 @@
 
       var heatmapChart = function(csvFile) {
         svg.selectAll(".column").remove();
-        var first = {
-        Star1: "542",
-        Star2: "606",
-        Star3: "1430",
-        Star4: "3967",
-        Star5: "13928",
-        average: "4.47",
-        column: "2",
-        count: "20473",
-        department: "Automotive",
-        dept: "AUTO",
-        rank_average: "2",
-        rank_total: "22",
+        var first = {Star1: "217",
+        Star2: "250",
+        Star3: "772",
+        Star4: "2084",
+        Star5: "6938",
+        average: "4.49",
+        column: "1",
+        count: "10261",
+        department: "Musical_Instruments",
+        dept: "MI",
+        rank_average: "1",
+        rank_total: "24",
         row: "1"};
         click(first);
 
@@ -399,7 +401,7 @@
           left: 30
         };
 
-        var width = 560,
+        var width = 650,
           height = 300;
 
         d3.select("#graphic")
@@ -417,15 +419,18 @@
             "translate(" + margin.left + "," + margin.top + ")"
           );
 
+        var domainMax = Math.max.apply(
+          Math,
+          chartData.map(function(obj) {
+            return obj.Average;
+          })
+        );
+        domainMax = domainMax + domainMax / 3.75;
+
         var x = d3.scale
           .linear()
-          .range([0, width / 3])
-          .domain([
-            0,
-            d3.max(chartData, function(d) {
-              return d.Average;
-            })
-          ]);
+          .range([0, width])
+          .domain([ 0, domainMax]);
 
         var y = d3.scale
           .ordinal()
@@ -481,11 +486,7 @@
           .attr("height", y.rangeBand() * 2)
           .attr("x", 0)
           .attr("width", function(d) {
-            if (selected == "Total") {
-              return x(d.Average) / 10;
-            } else {
               return x(d.Average);
-            }
           });
 
         //add a value label to the right of each bar
@@ -497,14 +498,14 @@
           })
           //x position is 3 pixels to the right of the bar
           .attr("x", function(d) {
-            if (selected == "Total") {
-              return x(d.Average) / 10 + 3;
-            } else {
               return x(d.Average) + 3;
-            }
           })
           .text(function(d) {
-            return d.Average;
+            if(selected == 'Percentage'){
+              return d.Average + '%';
+            }else {
+              return d.Average;
+            }
           });
       };
 
