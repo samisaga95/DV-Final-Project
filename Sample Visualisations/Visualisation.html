@@ -40,7 +40,7 @@
 
         <div class="col-sm-6 second-column-wrapper">
           <h3>Category Analysis</h3>
-          <div class="col-sm-6 heat-map-hover" id="table"></div>
+          <div class="col-sm-12 heat-map-hover" id="table"></div>
           <h3>Rating Distribution</h3>
           <div class="set-picker" id="set-picker"></div>
           <div id="graphic"></div>
@@ -190,7 +190,7 @@
 
         var x = d3.scale
           .linear()
-          .range([0, 18])
+          .range([0, width / 3])
           .domain([
             0,
             d3.max(chartData, function(d) {
@@ -253,7 +253,7 @@
           .attr("x", 0)
           .attr("width", function(d) {
             if (selected == "Total") {
-              return x(d.Average);
+              return x(d.Average) / 10;
             } else {
               return x(d.Average);
             }
@@ -269,7 +269,7 @@
           //x position is 3 pixels to the right of the bar
           .attr("x", function(d) {
             if (selected == "Total") {
-              return x(d.Average) + 3;
+              return x(d.Average) / 10 + 3;
             } else {
               return x(d.Average) + 3;
             }
@@ -326,23 +326,23 @@
         var chartData2 = [
           {
             Category: "5#",
-            Average: (d.Star5 * 100) / tot
+            Average: ((d.Star5 * 100) / tot).toFixed(2)
           },
           {
             Category: "4#",
-            Average: (d.Star4 * 100) / tot
+            Average: ((d.Star4 * 100) / tot).toFixed(2)
           },
           {
             Category: "3#",
-            Average: (d.Star3 * 100) / tot
+            Average: ((d.Star3 * 100) / tot).toFixed(2)
           },
           {
             Category: "2#",
-            Average: (d.Star2 * 100) / tot
+            Average: ((d.Star2 * 100) / tot).toFixed(2)
           },
           {
             Category: "1#",
-            Average: (d.Star1 * 100) / tot
+            Average: ((d.Star1 * 100) / tot).toFixed(2)
           }
         ];
         console.log(selected);
@@ -380,11 +380,16 @@
         console.log(selected);
 
         //Table
-        var table = d3.select("#table").append("table");
+        var table = d3
+          .select("#table")
+          .append("table")
+          .attr("class", "table");
 
         var HeaderRow = table.append("tr");
 
-        HeaderRow.append("th").text(d.department);
+        HeaderRow.append("th")
+          .text(d.department)
+          .attr("colspan", 2);
 
         var tr = table
           .selectAll("tr.data")
@@ -392,10 +397,6 @@
           .enter()
           .append("tr")
           .attr("class", "datarow");
-
-        d3.selectAll(".datarow")
-          .filter(":nth-child(even)")
-          .attr("class", "datarow even");
 
         tr.append("td")
           .attr("class", "data name")
@@ -410,7 +411,7 @@
           });
       }
 
-      heatmapChart(dataset[0][1]);
+      heatmapChart(dataset[1][1]);
 
       var datasetpicker = d3
         .select("#dataset-picker")
