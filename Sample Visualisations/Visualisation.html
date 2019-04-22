@@ -31,7 +31,7 @@
         <div id="display_div_id"></div>
       </div>
       <div class="row">
-        <div class="col-sm-6 heat-map-wrapper">
+        <div class="col-sm-8 heat-map-wrapper">
           <h3>Category</h3>
           <div class="dataset-picker" id="dataset-picker"></div>
           <div class="row">
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="col-sm-6 second-column-wrapper">
+        <div class="col-sm-4 second-column-wrapper">
           <h3>Rating Distribution</h3>
           <div class="set-picker" id="set-picker"></div>
           <div id="graphic"></div>
@@ -60,6 +60,7 @@
     </div>
 
     <script type="text/javascript">
+      var selected = 'Total';
       var margin = { top: 50, right: 0, bottom: 100, left: 30 },
         width = 960 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom,
@@ -132,7 +133,7 @@
               return colorScale(d.average);
             })
             //.on("click", click)
-            .on("mouseover", click);
+            .on("click", click);
 
           cards
             .append("text")
@@ -148,7 +149,7 @@
               return d.dept;
             })
             //.on("click", click)
-            .on("mouseover", click);
+            .on("click", click);
         });
       };
 
@@ -180,7 +181,7 @@
 
         var x = d3.scale
           .linear()
-          .range([0, width / 2])
+          .range([0, width / 3])
           .domain([
             0,
             d3.max(chartData, function(d) {
@@ -310,9 +311,15 @@
             Average: (d.Star1 * 100) / tot
           }
         ];
+        console.log(selected);
 
         var charts = [["Total", chartData1], ["Percentage", chartData2]];
-        displayBarGraph(chartData1);
+        if(selected == "Total"){
+          displayBarGraph(chartData1);
+        } else{
+          displayBarGraph(chartData2);
+        }
+
         var setpicker = d3
           .select("#set-picker")
           .selectAll(".dataset-button")
@@ -327,8 +334,10 @@
           .attr("type", "button")
           .attr("class", "dataset-button")
           .on("click", function(d) {
+            selected = d[0];
             displayBarGraph(d[1]);
           });
+          console.log(selected);
 
         //Table
         var table = d3.select("#table").append("table");
