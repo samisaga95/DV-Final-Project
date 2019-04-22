@@ -2,7 +2,7 @@ import os
 import csv
 import json
 
-rowSize =2
+rowSize =4
 directory = "/Users/santoshkumaramisagadda/Desktop/Acads/DV/DV Final Project/Data"
 
 with open('/Users/santoshkumaramisagadda/Desktop/Acads/DV/DV Final Project/Output/data.csv', mode='w') as file:
@@ -39,7 +39,7 @@ for filename in os.listdir(directory):
                      count4+=1
                  if line["overall"] == 5:
                      count5+=1
-             average = runningSum / (count1+count2+count3+count4+count5)
+             average = round(runningSum / (count1+count2+count3+count4+count5),2)
 
          with open('/Users/santoshkumaramisagadda/Desktop/Acads/DV/DV Final Project/Output/data.csv',
                   mode='a') as file:

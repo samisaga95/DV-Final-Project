@@ -30,6 +30,10 @@ text.axis-worktime {
   clear: both;
 }
 
+td.chart {
+  background-color: white;
+}
+
 table {
   font: 14px sans-serif;
   vertical-align: middle;
@@ -45,13 +49,8 @@ th {
 tr {
   background-color: #aaa;
 }
-
-tr.even {
-  background-color: whitesmoke;
-}
-
-td.chart {
-  background-color: white;
+tr:first-of-type{
+  background-color: #fb0;
 }
 
 th {
@@ -68,6 +67,8 @@ td.data {
 td.value {
   text-align: right;
 }
+
+
 
 .num_tiles {
   width: 30px;
@@ -128,13 +129,21 @@ td.value {
   /* Height of ROW: min-height: -webkit-fill-available; */
 }
 .heat-map-hover {
-  padding-top: 50px;
+  padding-top: 15px;
 }
 .dataset-picker {
   /*padding-left: 25px;*/
+  text-align: center;
 }
 .dataset-button {
   margin: 0 25px;
+  height: 35px;
+  width: 110px;
+  line-height: 35px;
+  border-radius: 4px;
+}
+.first-highlight{
+  background-color: #fb0;
 }
 
 .graph {
@@ -160,4 +169,43 @@ td.value {
   width: 100%;
   text-align: center;
   padding: 20px;
+}
+.selected-tab{
+  background-color: #fb0;
+  outline: none;
+  border: none;
+}
+.back-trans{
+  background: transparent;
+}
+.highlight:nth-child(2){
+  background-color: #fb0;
+  outline: none;
+  border: none;
+}
+.highlight2:first-child{
+  background-color: #fb0;
+  outline: none;
+  border: none;
+}
+.heading{
+  padding: 20px 0;
+}
+.set-picker{
+  text-align: center;
+}
+.prod-header{
+  padding: 10px 30px;
+  color: #fff;
+}
+text {
+  font: 15px sans-serif;
+}
+circle {
+    stroke: #565352;
+    stroke-width: 1;
+}
+
+svgcontainer1{
+  background-color: #bbbbbb
 }
