@@ -30,16 +30,17 @@
         <div id="display_div_id"></div>
       </div>
       <div class="row">
-        <div class="col-sm-8 heat-map-wrapper">
+        <div class="col-sm-6 heat-map-wrapper">
           <h3>Category</h3>
           <div class="dataset-picker" id="dataset-picker"></div>
           <div class="row">
-            <div class="col-sm-6" id="chart"></div>
-            <div class="col-sm-6 heat-map-hover" id="table"></div>
+            <div class="col-sm-12" id="chart"></div>
           </div>
         </div>
 
-        <div class="col-sm-4 second-column-wrapper">
+        <div class="col-sm-6 second-column-wrapper">
+          <h3>Category Analysis</h3>
+          <div class="col-sm-6 heat-map-hover" id="table"></div>
           <h3>Rating Distribution</h3>
           <div class="set-picker" id="set-picker"></div>
           <div id="graphic"></div>
@@ -93,7 +94,7 @@
       var svg = d3
         .select("#chart")
         .append("svg")
-        .attr("width", gridSize * 16 + margin.left + margin.right)
+        .attr("width", gridSize * 1.75 * 4 + margin.left + margin.right)
         .attr("height", gridSize * 6 + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -126,7 +127,7 @@
           cards
             .append("rect")
             .attr("x", function(d) {
-              return (d.column - 1) * gridSize * 1.5;
+              return (d.column - 1) * gridSize * 1.75;
             })
             .attr("y", function(d) {
               return (d.row - 1) * gridSize;
@@ -134,7 +135,7 @@
             .attr("rx", 4)
             .attr("ry", 4)
             .attr("class", "column bordered")
-            .attr("width", gridSize * 1.5)
+            .attr("width", gridSize * 1.75)
             .attr("height", gridSize)
             .attr("cursor", "pointer")
             .style("fill", function(d) {
@@ -147,7 +148,7 @@
             .append("text")
             .attr("class", "column bordered")
             .attr("x", function(d) {
-              return ((d.column - 1) * gridSize + gridSize / 2 - 25) * 1.5;
+              return ((d.column - 1) * gridSize + gridSize / 2 - 20) * 1.75;
             })
             .attr("y", function(d) {
               return d.row * gridSize - (gridSize / 2 - 8);
@@ -169,8 +170,8 @@
           left: 30
         };
 
-        var width = 600 - margin.left - margin.right,
-          height = 300 - margin.top - margin.bottom;
+        var width = 560,
+          height = 300;
 
         d3.select("#graphic")
           .select("svg")
@@ -179,8 +180,8 @@
         var svg = d3
           .select("#graphic")
           .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
+          .attr("width", width - margin.left - margin.right)
+          .attr("height", height - margin.top - margin.bottom)
           .append("g")
           .attr(
             "transform",
@@ -189,7 +190,7 @@
 
         var x = d3.scale
           .linear()
-          .range([0, width / 3])
+          .range([0, 18])
           .domain([
             0,
             d3.max(chartData, function(d) {
@@ -252,8 +253,8 @@
           .attr("x", 0)
           .attr("width", function(d) {
             if (selected == "Total") {
-              return x(d.Average) / 10;
-            }else {
+              return x(d.Average);
+            } else {
               return x(d.Average);
             }
           });
@@ -268,8 +269,8 @@
           //x position is 3 pixels to the right of the bar
           .attr("x", function(d) {
             if (selected == "Total") {
-              return x(d.Average) / 10 + 3;
-            }else{
+              return x(d.Average) + 3;
+            } else {
               return x(d.Average) + 3;
             }
           })
