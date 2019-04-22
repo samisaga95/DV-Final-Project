@@ -58,11 +58,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="container">
+        <div class="second-column-wrapper col-sm-6">
           <div style="text-align:center" id="svgcontainer1"></div>
-          <div class="review-container">
-            <ol class="review-list"></ol>
-          </div>
+        </div>
+        <div class="heat-map-wrapper col-sm-6 review-container">
+          <ol class="review-list"></ol>
         </div>
       </div>
     </div>
@@ -75,11 +75,11 @@
         gridSize = Math.floor(width / 13),
         buckets = 10,
         colors = [
-          "#ffffd9",
-          "#edf8b1",
-          "#c7e9b4",
-          "#7fcdbb",
-          "#41b6c4",
+          "#ffffff",
+          "#ffeebf",
+          "#ffdd7f",
+          "#E1A809",
+          "#ffbb00",
           "#1d91c0",
           "#225ea8",
           "#253494",
@@ -432,7 +432,7 @@
           d3.select("#dataset-picker")
             .selectAll(".dataset-button")
             .attr("style", "deselected")
-            .attr("class","dataset-button");
+            .attr("class", "dataset-button");
           d3.select(this).style("background-color", "#fb0");
           d3.select(this).style("border", "none");
           d3.select(this).style("outline", "none");
@@ -460,7 +460,7 @@
       }
     </script>
     <script>
-      var width = 960,
+      var width = 520,
         height = 500,
         padding = 1.5, // separation between same-color nodes
         clusterPadding = 6, // separation between different-color nodes
@@ -472,6 +472,10 @@
       //         bubbleDisplay();
       //     });
       var loadBubbleGraph = function(categoryName) {
+        d3.select("#svgcontainer1")
+          .selectAll("svg")
+          .remove();
+
         $.getJSON("./two.json", function(data) {
           var data = data;
           console.log(data);
