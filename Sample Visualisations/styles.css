@@ -51,8 +51,11 @@ tr {
 }
 tr:first-of-type{
   background-color: #fb0;
+  border-top: none;
 }
-
+ .table th{
+  border-top: none;
+}
 th {
   padding-left: 10px;
 }
@@ -133,21 +136,16 @@ td.value {
 }
 .dataset-picker {
   /*padding-left: 25px;*/
-  text-align: center;
 }
 .dataset-button {
   margin: 0 25px;
-  height: 35px;
-  width: 110px;
-  line-height: 35px;
-  border-radius: 4px;
 }
 .first-highlight{
   background-color: #fb0;
 }
 
 .graph {
-  fill: #5f89ad;
+  fill: #fb0;
 }
 
 .axis {
@@ -188,16 +186,7 @@ td.value {
   outline: none;
   border: none;
 }
-.heading{
-  padding: 20px 0;
-}
-.set-picker{
-  text-align: center;
-}
-.prod-header{
-  padding: 10px 30px;
-  color: #fff;
-}
+
 text {
   font: 15px sans-serif;
 }

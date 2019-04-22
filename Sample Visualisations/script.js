@@ -1,36 +1,45 @@
 ;
 (function($, d3, moment) {
   'use strict'
-
+  console.log('Entering')
+var dataset = data();
   // *** THE DATA *** //
-  var dataset = function() {
-    var count = 200;
-
-    var randInt = function(max, min) {
-      max = max || 20;
-      min = min || 0;
-      return Math.floor(Math.random() * max) + min;
-    };
-
-    var arr = [],
-      startDate = moment("2015-09-01");
-    for (let i = 0; i < count; i++) {
+function data() {
+var arr = []
+ d3.json("../Dataset/timeline_output.json", function(data) {
+    for (var dt in data) {
       arr.push({
-        date: startDate.format("YYYY-MM-DD"),
-        values: [randInt(), randInt(), randInt()],
+        date: dt,
+        values: data[dt],
         float: Math.random() * 1000
       });
-      startDate = startDate.add(Math.ceil(Math.random() * 1) + 2, "days");
     }
+    });
+  return arr
+  }
 
-    return arr;
-  }();
+
+
+var interval = setInterval(function(){
+ if(dataset != null){
+    maincall();
+    clearInterval(interval);
+ }
+ }, 1000);
+
+
+console.log(dataset)
+function maincall(){
 
   // *** THE COLORS / KEY *** //
   var colors = [
     ["Pending", "#1f77b4"],
     ["InProgress", "#2ca02c"],
-    ["Completed", "#ff7f0e"]
+    ["Completed", "#ff7f0e"],
+        ["Completed1", "#FF4500"],
+            ["Completed2", "#FFA500"]
+
+
   ];
 
   // *** SETTINGS *** //
@@ -42,7 +51,7 @@
       right: 100
     };
     var dim = {
-      width: 850,
+      width: 1000,
       height: 400
     };
 
@@ -54,6 +63,7 @@
 
   var renderChart = function(dataset, colors, settings) {
     // setup data for graphing ... re-map data and then stack
+
     var remapped = colors.map(function(c, i) {
       return dataset.map(function(d, ii) {
         return {
@@ -186,6 +196,7 @@
   }; // end renderChart //
 
   var renderSlider = function(dataset, settings, callback) {
+        console.log(dataset)
 
     var RangeSlider = function(svg, width, radius, color, translater, callback) {
       var self = this,
@@ -360,8 +371,8 @@
               height: 50
             });
 
-      var min = moment(dataset[0].date),
-          max = moment(dataset[dataset.length-1].date),
+      var min = moment('2010-11-11'),
+          max = moment('2019-11-11'),
           handles = {
             size: 8
           };
@@ -454,7 +465,9 @@
     return callback;
   }(dataset, colors, settings);
 
+
   renderSlider(dataset, settings, updateChart);
 
+}
 
 }(jQuery, window.d3, window.moment));
