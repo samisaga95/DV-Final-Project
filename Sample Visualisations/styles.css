@@ -51,8 +51,11 @@ tr {
 }
 tr:first-of-type{
   background-color: #fb0;
+  border-top: none;
 }
-
+ .table th{
+  border-top: none;
+}
 th {
   padding-left: 10px;
 }
@@ -147,7 +150,7 @@ td.value {
 }
 
 .graph {
-  fill: #5f89ad;
+  fill: #fb0;
 }
 
 .axis {
