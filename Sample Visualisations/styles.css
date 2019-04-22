@@ -133,6 +133,7 @@ td.value {
 }
 .dataset-picker {
   /*padding-left: 25px;*/
+  text-align: center;
 }
 .dataset-button {
   margin: 0 25px;
@@ -183,7 +184,16 @@ td.value {
   outline: none;
   border: none;
 }
-
+.heading{
+  padding: 20px 0;
+}
+.set-picker{
+  text-align: center;
+}
+.prod-header{
+  padding: 10px 30px;
+  color: #fff;
+}
 text {
   font: 15px sans-serif;
 }
