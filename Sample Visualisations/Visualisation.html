@@ -337,8 +337,11 @@
             selected = d[0];
             displayBarGraph(d[1]);
             d3.select("#set-picker")
-            .selectAll(".dataset-button").attr("style","back-trans");
+            .selectAll(".dataset-button").attr("style","dataset-button back-trans");
+            //d3.select(this).attr("style","selected-tab");
             d3.select(this).style("background-color", "#fb0");
+            d3.select(this).style("border", "none");
+            d3.select(this).style("outline", "none");
           });
 
         //Table

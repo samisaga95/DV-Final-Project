@@ -136,6 +136,9 @@ td.value {
 .dataset-button {
   margin: 0 25px;
 }
+.first-highlight{
+  background-color: #fb0;
+}
 
 .graph {
   fill: #5f89ad;
@@ -162,7 +165,9 @@ td.value {
   padding: 20px;
 }
 .selected-tab{
-  background-color: #333;
+  background-color: #fb0;
+  outline: none;
+  border: none;
 }
 .back-trans{
   background: transparent;
