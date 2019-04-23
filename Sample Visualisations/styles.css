@@ -3,7 +3,7 @@ body {
 }
 rect.bordered {
   stroke: #e6e6e6;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 
 text.mono {
@@ -115,11 +115,11 @@ td.value {
 }
 .heat-map-wrapper {
   padding: 20px;
-  background-color: #444;
+  background-color: #aaa;
 }
 .total-reviews-wrapper{
   padding: 20px;
-  background-color: #aaa;
+  background-color: #444;
   height: 60px;
   /*width: 100%;*/
 }
@@ -129,6 +129,7 @@ td.value {
 }
 .total-reviews h4{
   float: right;
+  color: #fff;
 }
 .total-numbers{
   float: right;
@@ -185,7 +186,7 @@ td.value {
   font-size: 13px;
 }
 .timeseries-wrapper{
-  background-color: #aaa;
+  background-color: #555;
   height: 100%;
   width: 100%;
   text-align: center;
@@ -217,7 +218,7 @@ td.value {
 }
 .prod-header{
   padding: 10px 30px;
-  color: #fff;
+  color: #333;
 }
 text {
   font: 15px sans-serif;

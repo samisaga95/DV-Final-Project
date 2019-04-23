@@ -293,20 +293,32 @@
         buckets = 10,
         colors = [
           "#ffffff",
-          "#ffeebf",
-          "#ffdd7f",
-          "#E1A809",
-          "#ffbb00",
+          "#cccccc",
+          "#999",
+          "#666",
+          "#333",
           "#1d91c0",
           "#225ea8",
           "#253494",
           "#081d58"
         ], // alternatively colorbrewer.YlGnBu[9]
+        textColors = [
+          '#333',
+          '#333',
+          '#333',
+          '#fff',
+          '#fff',
+          '#333',
+          '#333',
+          '#333',
+          '#fff'
+        ],
         dataset = [
           ["Total", "./dataTotal.csv"],
           ["Average", "./dataAverage.csv"],
           ["Alphabetical", "./dataName.csv"]
         ];
+
 
       var svg = d3
         .select("#chart")
@@ -348,6 +360,19 @@
             ])
             .range(colors);
 
+          var textColorScale = d3.scale
+            .quantile()
+            .domain([
+              d3.min(data, function(d) {
+                return d.average;
+              }),
+              buckets - 1,
+              d3.max(data, function(d) {
+                return d.average;
+              })
+            ])
+            .range(textColors);
+
           var cards = svg
             .selectAll(".column")
             .data(data, function(d) {
@@ -385,6 +410,9 @@
               return d.row * gridSize - (gridSize / 2 - 8);
             })
             .attr("cursor", "pointer")
+            .style("fill", function(d){
+              return textColorScale(d.average);
+            })
             .text(function(d) {
               return d.department.split("_")[0];
             })
