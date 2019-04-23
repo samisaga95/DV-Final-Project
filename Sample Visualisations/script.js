@@ -33,11 +33,11 @@ function maincall(){
 
   // *** THE COLORS / KEY *** //
   var colors = [
-    ["Pending", "#1f77b4"],
-    ["InProgress", "#2ca02c"],
-    ["Completed", "#ff7f0e"],
-        ["Completed1", "#FF4500"],
-            ["Completed2", "#FFA500"]
+    ["1", "#1f77b4"],
+    ["2", "#2ca02c"],
+    ["3", "#ff7f0e"],
+        ["4", "#FF4500"],
+            ["5", "#FFA500"]
 
 
   ];
@@ -158,7 +158,8 @@ function maincall(){
       var xAxis = function(timeScale, min, max) {
         var tickInterval, tickFormat, tickStep = 1,
           duration = moment.duration(max.diff(min));
-
+//tickInterval = d3.time.month;
+//          tickFormat = "%b '%y";
 
         if (duration.asMonths() > 5) {
           tickInterval = d3.time.month;
@@ -178,7 +179,7 @@ function maincall(){
           .orient('bottom')
           .scale(timeScale)
           .ticks(tickInterval, tickStep)
-          .tickSize(5)
+          .tickSize(1)
           .tickPadding(5)
           .tickFormat(d3.time.format(tickFormat));
       }(timeScale, min, max);
@@ -189,7 +190,32 @@ function maincall(){
         .attr('transform', 'translate(' + settings.margins.left + ',' + (settings.dim.height + settings.margins.top) + ')')
         .call(xAxis);
 
-    }(svg, dataset[0].date, dataset[dataset.length - 1].date, settings));
+
+
+	var y = d3.scale.linear()
+			.domain([0, 150])
+			.range([400, 0]);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10);
+
+  svg.append("g")
+      .attr("class", "y-axis")
+      .attr('transform', 'translate(' + settings.margins.left + ',' + (settings.margins.top) + ')')
+      .attr("stroke-width","2")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Review Count");
+
+
+
+    }(svg,  moment('2014-04-12'), moment('2014-12-12'), settings));
 
 
     return svg;
@@ -371,8 +397,8 @@ function maincall(){
               height: 50
             });
 
-      var min = moment('2010-11-11'),
-          max = moment('2019-11-11'),
+      var min = moment('2014-04-12'),
+          max = moment('2014-12-12'),
           handles = {
             size: 8
           };

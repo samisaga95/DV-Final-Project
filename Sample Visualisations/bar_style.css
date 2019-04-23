@@ -60,8 +60,56 @@ p {
   }
 
   text {
-    font: 10px sans-serif;
+    font: 5px sans-serif;
   }
+}
+
+.one{
+    background: #1f77b4;
+}
+
+.two{
+    background: #2ca02c;
+}
+
+.three{
+    background: #ff7f0e;
+}
+
+.four{
+    background: #FF4500;
+}
+
+.five{
+    background: #FFA500;
+}
+
+.ltext {
+    float: left;
+    width: calc(100% - 20px);
+}
+
+.lcolor {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    float: left;
+    margin: 5px 0 5px 10px;
+}
+
+.lrow {
+    background: white;
+}
+
+.legends {
+    position: absolute;
+    width: 100px;
+    right:10%;
+    top:10%;
+}
+
+#Tchart{
+    position:relative;
 }
 
 .controllers {
