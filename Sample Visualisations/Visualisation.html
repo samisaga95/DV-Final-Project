@@ -586,10 +586,6 @@
               d3.select("#chart")
                 .selectAll("rect")
                 .attr("selected", false);
-              // .selectAll("text")
-              // .style("fill", function(d) {
-              //   return textColorScale(d.average);
-              // });
               d3.select(this)
                 .attr("selected", true)
                 .style("fill", "fb0");
@@ -613,18 +609,7 @@
             .text(function(d) {
               return d.department.split("_")[0];
             })
-            //.on("click", click)
-            .on("click", function(d) {
-              // d3.select("#chart")
-              //   .selectAll("rect").style("fill", function(d) {
-              //     return colorScale(d.average);
-              //   })
-              //   .selectAll("text").style("fill", function(d){
-              //     return textColorScale(d.average);
-              //   });
-              // d3.select(this).style("fill", "999");
-              //click(d);
-            });
+            .on("click", function(d) {});
         });
       };
 
@@ -720,6 +705,11 @@
           })
           .attr("height", y.rangeBand() * 2)
           .attr("x", 0)
+          .attr("width", 0)
+          .transition()
+          .delay(function(d, i) {
+            return i * 100;
+          })
           .attr("width", function(d) {
             return x(d.Average);
           });
@@ -731,10 +721,16 @@
           .attr("y", function(d) {
             return y(d.Category) * 2 + y.rangeBand() / 2 + 12;
           })
+          .attr("x", 0)
+          .transition()
+          .delay(function(d, i) {
+            return i * 100;
+          })
           //x position is 3 pixels to the right of the bar
           .attr("x", function(d) {
             return x(d.Average) + 3;
           })
+
           .text(function(d) {
             if (selected == "Percentage") {
               return d.Average + "%";
