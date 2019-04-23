@@ -3,7 +3,7 @@ body {
 }
 rect.bordered {
   stroke: #e6e6e6;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 
 text.mono {
@@ -51,8 +51,11 @@ tr {
 }
 tr:first-of-type{
   background-color: #fb0;
+  border-top: none;
 }
-
+ .table th{
+  border-top: none;
+}
 th {
   padding-left: 10px;
 }
@@ -67,8 +70,6 @@ td.data {
 td.value {
   text-align: right;
 }
-
-
 
 .num_tiles {
   width: 30px;
@@ -114,7 +115,25 @@ td.value {
 }
 .heat-map-wrapper {
   padding: 20px;
+  background-color: #aaa;
+}
+.total-reviews-wrapper{
+  padding: 20px;
   background-color: #444;
+  height: 60px;
+  /*width: 100%;*/
+}
+.total-reviews{
+  height: 100%;
+  width: 100%;
+}
+.total-reviews h4{
+  float: right;
+  color: #fff;
+}
+.total-numbers{
+  float: right;
+  margin-left: 10px;
 }
 .first-column-wrapper {
   padding: 20px;
@@ -136,18 +155,21 @@ td.value {
   text-align: center;
 }
 .dataset-button {
-  margin: 0 25px;
+  margin: 0 20px;
   height: 35px;
   width: 110px;
   line-height: 35px;
   border-radius: 4px;
+}
+.dataset-button:first-child{
+  margin-left: -10px;
 }
 .first-highlight{
   background-color: #fb0;
 }
 
 .graph {
-  fill: #5f89ad;
+  fill: #fb0;
 }
 
 .axis {
@@ -164,7 +186,7 @@ td.value {
   font-size: 13px;
 }
 .timeseries-wrapper{
-  background-color: #aaa;
+  background-color: #555;
   height: 100%;
   width: 100%;
   text-align: center;
@@ -189,14 +211,14 @@ td.value {
   border: none;
 }
 .heading{
-  padding: 20px 0;
+  padding: 20px 15px;
 }
 .set-picker{
   text-align: center;
 }
 .prod-header{
   padding: 10px 30px;
-  color: #fff;
+  color: #333;
 }
 text {
   font: 15px sans-serif;
