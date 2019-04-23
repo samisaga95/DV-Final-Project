@@ -305,7 +305,7 @@
         textColors = [
           '#333',
           '#333',
-          '#333',
+          '#111',
           '#fff',
           '#fff',
           '#333',
@@ -330,19 +330,19 @@
 
       var heatmapChart = function(csvFile) {
         svg.selectAll(".column").remove();
-        var first = {Star1: "217",
-        Star2: "250",
-        Star3: "772",
-        Star4: "2084",
-        Star5: "6938",
-        average: "4.49",
-        column: "1",
-        count: "10261",
-        department: "Musical_Instruments",
-        dept: "MI",
-        rank_average: "1",
-        rank_total: "24",
-        row: "1"};
+        var first = {Star1: "16546",
+          Star2: "16754",
+          Star3: "33254",
+          Star4: "68168",
+          Star5: "211633",
+          average: "4.27",
+          column: "2",
+          count: "346355",
+          department: "Health_and_Personal_Care",
+          dept: "HnPC",
+          rank_average: "10",
+          rank_total: "8",
+          row: "3"};
         click(first);
 
         d3.csv(csvFile, function(error, data) {
@@ -373,6 +373,22 @@
             ])
             .range(textColors);
 
+          // double y axis translate
+          var transform;
+          d3.select("#chart")
+            .select(".axis")
+            .selectAll(".tick")
+            .attr("transform", function() {
+              transform = d3.transform(d3.select(this).attr("transform"));
+              return (
+                "translate(" +
+                transform.translate[0] +
+                "," +
+                transform.translate[1] * 2 +
+                ")"
+              );
+            });
+
           var cards = svg
             .selectAll(".column")
             .data(data, function(d) {
@@ -395,10 +411,25 @@
             .attr("height", gridSize)
             .attr("cursor", "pointer")
             .style("fill", function(d) {
-              return colorScale(d.average);
+              if(d.row == 3 && d.column == 2){
+                return "#fb0";
+              }else{
+                return colorScale(d.average);
+              }
             })
             //.on("click", click)
-            .on("click", click);
+            .on("click", function (d){
+              d3.select("#chart")
+                .selectAll("rect").style("fill", function(d) {
+                  return colorScale(d.average);
+                })
+                .selectAll("text").style("fill", function(d){
+                  return textColorScale(d.average);
+                });
+              d3.select(this).style("fill", "fb0");
+
+              click(d);
+            });
 
           cards
             .append("text")
@@ -417,7 +448,17 @@
               return d.department.split("_")[0];
             })
             //.on("click", click)
-            .on("click", click);
+            .on("click", function (d){
+              // d3.select("#chart")
+              //   .selectAll("rect").style("fill", function(d) {
+              //     return colorScale(d.average);
+              //   })
+              //   .selectAll("text").style("fill", function(d){
+              //     return textColorScale(d.average);
+              //   });
+              // d3.select(this).style("fill", "999");
+              //click(d);
+            });
         });
       };
 
