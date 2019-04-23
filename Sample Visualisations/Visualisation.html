@@ -51,6 +51,7 @@
         position: relative;
       }
     </style>
+
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -73,6 +74,8 @@
         <img class="logo" src="./Amazon-Logo.jpg" />
         <a class="header-text h1">ReviewHub</a>
       </div>
+
+      <!-- </div> -->
     </div>
     <div class="container page-wrapper">
       <div class="row total-reviews-wrapper">
@@ -149,9 +152,51 @@
       </div>
     </div>
     <script>
+      var width = 520,
+        height = 500,
+        padding = 1.5, // separation between same-color nodes
+        clusterPadding = 6, // separation between different-color nodes
+        maxRadius = 50;
+
+      //
+      //         data1 = data;
+      //         console.log(data);
+      //         bubbleDisplay();
+      //     });
       var loadBubbleGraph = function(categoryName) {
         var filename = "new 7.json";
+        var onClick = function(d) {
+          selectedWord = d.text;
 
+          d3.select("#svgcontainer1")
+            .select("svg")
+            .selectAll("text")
+            .attr("stroke", function(d) {
+              if (d.text == selectedWord) {
+                return "red";
+              } else {
+                return "black";
+              }
+            });
+
+          // d3.select("#svgcontainer1")
+          // .select("svg")
+          // .selectAll("text")
+          // .attr("stroke", "black");
+
+          $(".review-container").html("");
+          $.each(d.reviews, function(key, val) {
+            var card =
+              "<div class='card' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;'><div class='card-body'><h5 class='card-title' style='font-weight: bold;'>" +
+              d.productId[key] +
+              "</h5><h6 class='card-subtitle mb-2'>Rating: " +
+              d.rating[key] +
+              "</h6><p class='card-text'>" +
+              val +
+              "</p></div></div>";
+            $(".review-container").append(card);
+          });
+        };
         var width = 600,
           height = 600,
           padding = 1.5, // separation between same-color nodes
@@ -162,7 +207,7 @@
           .selectAll("svg")
           .remove();
 
-        $.getJSON(filename, function(data) {
+        $.getJSON("./new 7.json", function(data) {
           var data = data;
           var maxfreq = 0;
           var selectedWord = data[0].word;
@@ -174,15 +219,17 @@
             radius: data[0].frequency * 1,
             text: data[0].word,
             rating: data[0].rating,
+            productIDS: data[0].productIDS,
             x: 0,
             y: 0
           };
           onClick(wordObj);
+
           data.forEach(function(d) {
-            d.frequency = +d.frequency;
             if (d.frequency > maxfreq) {
               maxfreq = d.frequency;
             }
+            d.frequency = +d.frequency;
           });
 
           //unique cluster/group id's
@@ -265,46 +312,25 @@
             .append("text")
             .attr("dy", ".3em")
             .attr("cursor", "pointer")
-            .style("text-anchor", "middle")
-            .style("stroke", function(d) {
+            .attr("stroke", function(d) {
               if (d.text == selectedWord) {
                 return "red";
               } else {
                 return "black";
               }
             })
+            .style("text-anchor", "middle")
             .text(function(d) {
               return d.text;
             });
 
           node.on("click", function(d) {
-            d3.select("#svgcontainer1")
-              .selectAll("text")
-              .style("stroke", "black");
-
-            d3.select(this)
-              .select("text")
-              .style("stroke", "red");
-
             onClick(d);
-            // d3.select("#review-container")
           });
-          function onClick(d) {
-            $(".review-container").html("");
-            $.each(d.reviews, function(key, val) {
-              var card =
-                "<div class='card' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;'><div class='card-body'><h5 class='card-title' style='font-weight: bold;'>" +
-                d.productId[key] +
-                "</h5><h6 class='card-subtitle mb-2'>Rating: " +
-                d.rating[key] +
-                "</h6><p class='card-text'>" +
-                val +
-                "</p></div></div>";
-              $(".review-container").append(card);
-            });
-          }
+
           function create_nodes(data, node_counter) {
             var multiplier = width / (maxfreq * 7);
+            console.log("Multiplier", multiplier);
 
             var i = cs.indexOf(data[node_counter].group),
               r =
@@ -313,10 +339,10 @@
                 cluster: i,
                 sentiment: data[node_counter].sentiment,
                 reviews: data[node_counter].topReviews,
-                productId: data[node_counter].productIDS,
                 radius: data[node_counter].frequency * multiplier,
                 text: data[node_counter].word,
                 rating: data[node_counter].rating,
+                productId: data[node_counter].productIDS,
                 x:
                   Math.cos((i / m) * 2 * Math.PI) * 200 +
                   width / 2 +
@@ -401,10 +427,10 @@
         };
       };
     </script>
-
     <script type="text/javascript">
       var selected = "Percentage";
       var selectedDept = "Health_and_Personal_Care";
+
       var margin = { top: 50, right: 0, bottom: 100, left: 30 },
         width = 960 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom,
@@ -544,13 +570,17 @@
                 return colorScale(d.average);
               }
             })
-            //.on("click", click)
             .on("click", function(d) {
               selectedDept = d.department;
+
               d3.select("#chart")
                 .selectAll("rect")
                 .style("fill", function(d) {
                   return colorScale(d.average);
+                })
+                .selectAll("text")
+                .style("fill", function(d) {
+                  return textColorScale(d.average);
                 });
 
               d3.select("#chart")
@@ -563,6 +593,7 @@
               d3.select(this)
                 .attr("selected", true)
                 .style("fill", "fb0");
+
               click(d);
             });
 
@@ -581,19 +612,19 @@
             })
             .text(function(d) {
               return d.department.split("_")[0];
+            })
+            //.on("click", click)
+            .on("click", function(d) {
+              // d3.select("#chart")
+              //   .selectAll("rect").style("fill", function(d) {
+              //     return colorScale(d.average);
+              //   })
+              //   .selectAll("text").style("fill", function(d){
+              //     return textColorScale(d.average);
+              //   });
+              // d3.select(this).style("fill", "999");
+              //click(d);
             });
-          // //.on("click", click)
-          // .on("click", function(d) {
-          //   // d3.select("#chart")
-          //   //   .selectAll("rect").style("fill", function(d) {
-          //   //     return colorScale(d.average);
-          //   //   })
-          //   //   .selectAll("text").style("fill", function(d){
-          //   //     return textColorScale(d.average);
-          //   //   });
-          //   // d3.select(this).style("fill", "999");
-          //   //click(d);
-          // });
         });
       };
 
@@ -714,7 +745,7 @@
       };
 
       function click(d) {
-        loadBubbleGraph(d.department);
+        loadBubbleGraph("jdld");
         d3.select("#table")
           .select("table")
           .remove();
