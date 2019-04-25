@@ -47,8 +47,39 @@
         top: 30%;
       }
 
-      #Tchart {
+      .slider-wrap {
+          position: relative;
+      }
+
+      .left {
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          background: red;
+          left: 0;
+          top: 50%;
+          z-index: 1000;
+          border-radius: 20px;
+      }
+
+      .right {
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          background: red;
+          right: 0;
+          top: 50%;
+          z-index: 1000;
+          border-radius: 20px;
+      }
+
+      .slider-container {
+          overflow-x: scroll;
+      }
+
+      #Tchart{
         position: relative;
+        right: 0;
       }
     </style>
 
@@ -114,7 +145,13 @@
           <h3>Time series data</h3>
           <div id="controllers"></div>
 
-          <div id="Tchart"></div>
+          <div class="slider-wrap">
+            <!-- <div class="left"></div> -->
+            <div class="slider-container">
+              <div id="Tchart"></div>
+            </div>
+            <!-- <div class="right"></div> -->
+          </div>
           <div class="legends clearfix">
             <div class="lrow clearfix">
               <div class="lcolor five"></div>
