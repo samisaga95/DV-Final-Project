@@ -230,6 +230,37 @@ circle {
 
 #svgcontainer1{
   background-color: #bbbbbb;
-  
-}
 
+}
+.helpful-heading{
+  padding: 15px 15px 0px;
+  color: #fff;
+}
+.review-container1{
+  height: 100%;
+  width: 100%;
+  /*background-color: #444;*/
+  min-height: 60px;
+  color: #fff;
+}
+.review-wrapper{
+  max-height: 275px;
+  position: relative;
+  overflow: hidden;
+}
+.read-more {
+  position: absolute;
+  color: #fff;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0; padding: 30px 0;
+
+  /* "transparent" only works here because == rgba(0,0,0,0) */
+  background-image: linear-gradient(to bottom, transparent, black);
+}
+.read-more span{
+  cursor: pointer;
+  color: #fff;
+}
