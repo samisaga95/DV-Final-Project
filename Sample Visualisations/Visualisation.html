@@ -197,10 +197,10 @@
       </div>
     </div>
     <script>
-    var $el, $ps, $up, totalHeight, maxHeight,moreText, flag=0;
+    var $el, $ps, $up, totalHeight, reviewNumber = 3, maxHeight,moreText, flag=0;
       var loadHelpfulReviews = function loadHelpfulReviews(rating) {
-        //var filename = "help_"+selectedDept + "_5.json";
-        var filename = "help_Musical_Instruments_5.json";
+        var filename = "help_"+selectedDept + "_5.json";
+        //var filename = "help_Musical_Instruments_5.json";
 
         $("#more").html("Read full Reviews");
         $(".review-wrapper").css("height","300px");
@@ -220,7 +220,7 @@
             helpful: selectedData[score]
           };
           if(rating){
-            var reviewNumber = rating.Category.charAt(0) || 3;
+            reviewNumber = rating.Category.charAt(0) || 3;
             topReviews = "review_"+reviewNumber;
             productIDS = "product_"+reviewNumber;
             score = "score_" + reviewNumber;
@@ -231,6 +231,7 @@
             };
           }
 
+          $(".helpful-heading").html("Top Helpful Reviews for Rating #" + reviewNumber);
           $(".review-container1").html("");
           $.each(wordObj.reviews, function(key, val) {
             var card =
@@ -609,7 +610,7 @@
       var selected = "Percentage";
       var selectedDept = "Health_and_Personal_Care";
 
-      var margin = { top: 50, right: 0, bottom: 100, left: 30 },
+      var margin = { top: 50, right: 0, bottom: 100, left: 50 },
         width = 960 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom,
         gridSize = Math.floor(width / 13),
@@ -768,6 +769,7 @@
                 .attr("selected", true)
                 .style("fill", "fb0");
 
+              loadHelpfulReviews(null);
               click(d);
             });
 
@@ -787,8 +789,12 @@
             .text(function(d) {
               return d.department.split("_")[0];
             })
-            .on("click", function(d) {});
+            .on("click", function(d) {
+              loadHelpfulReviews(null);
+            });
+
         });
+
       };
 
       var displayBarGraph = function(chartData) {
