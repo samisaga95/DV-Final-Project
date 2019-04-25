@@ -44,7 +44,7 @@
         right: 100
       };
       var dim = {
-        width: 1000,
+        width: 10000,
         height: 400
       };
 
@@ -257,7 +257,7 @@
           .style("text-anchor", "end")
           .text("Review Count")
           .style("fill", "white");
-      })(svg, moment("2014-04-12"), moment("2014-12-12"), settings);
+      })(svg, moment("2000-03-20"), moment("2014-12-12"), settings);
 
       d3.select(".chart-wrapper")
         .selectAll("text")
@@ -471,7 +471,7 @@
           height: 50
         });
 
-      var min = moment("2014-04-12"),
+      var min = moment("2000-03-20"),
         max = moment("2014-12-12"),
         handles = {
           size: 8
