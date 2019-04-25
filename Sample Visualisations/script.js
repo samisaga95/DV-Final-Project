@@ -44,7 +44,7 @@
         right: 100
       };
       var dim = {
-        width: 10000,
+        width: 1000,
         height: 400
       };
 
@@ -76,7 +76,7 @@
             return d.x;
           })
         ) //pick one of the mapped arrays' x values for the domain
-        .rangeRoundBands([0, settings.dim.width]);
+        .rangeRoundBands([0, 7500]);
       var y = d3.scale
         .linear()
         .domain([
@@ -100,7 +100,7 @@
         .attr({
           class: "chart-wrapper",
           width:
-            settings.dim.width + settings.margins.left + settings.margins.right,
+            7000 + settings.margins.left + settings.margins.right,
           height:
             settings.dim.height + settings.margins.top + settings.margins.bottom
         });
@@ -168,7 +168,7 @@
         var timeScale = d3.time
           .scale()
           .domain([min.toDate(), max.toDate()])
-          .range([0, settings.dim.width]);
+          .range([0, 7500]);
 
         //create the x-axis from the time scale
         var xAxis = (function(timeScale, min, max) {
@@ -257,7 +257,7 @@
           .style("text-anchor", "end")
           .text("Review Count")
           .style("fill", "white");
-      })(svg, moment("2000-03-20"), moment("2014-12-12"), settings);
+      })(svg,dataset[0].date, dataset[dataset.length - 1].date, settings);
 
       d3.select(".chart-wrapper")
         .selectAll("text")
@@ -471,11 +471,12 @@
           height: 50
         });
 
-      var min = moment("2000-03-20"),
-        max = moment("2014-12-12"),
-        handles = {
-          size: 8
-        };
+      var min = moment(dataset[0].date),
+          max = moment(dataset[dataset.length-1].date),
+          handles = {
+            size: 12
+          };
+
       var timeScale = d3.time
         .scale()
         .domain([min.toDate(), max.toDate()])
@@ -487,7 +488,7 @@
         .append("svg")
         .attr({
           width:
-            settings.dim.width + settings.margins.left + settings.margins.right,
+            1000 + settings.margins.left + settings.margins.right,
           height: 50
         });
       var g = svg
