@@ -13,6 +13,7 @@ with open('../Dataset/reviews_Baby_5.json') as f:
         posix_time = data['unixReviewTime']
         rating = int(data['overall'])
         date = datetime.datetime.utcfromtimestamp(posix_time).strftime('%Y-%m-%d')
+
         visited.add(date)
         map_list[rating][date] += 1
 
@@ -22,5 +23,10 @@ for dt in visited:
     list = [map_list[rating][dt] for rating in range(1, 6)]
     final_dict[dt] = list
 
+from collections import OrderedDict
+
+ordered = OrderedDict(sorted(final_dict.items(), key=lambda t: t[0]))
+# print(ordered)
+
 with open('../Dataset/timeline_output.json', 'w') as fp:
-    json.dump(final_dict, fp)
+    json.dump(ordered, fp)
