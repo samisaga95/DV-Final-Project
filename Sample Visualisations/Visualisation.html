@@ -59,8 +59,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./bar_style.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -100,6 +100,14 @@
           <div class="set-picker" id="set-picker"></div>
           <div id="graphic"></div>
         </div>
+      </div>
+      <div class="row">
+          <h3 class="helpful-heading">Top Helpful Reviews</h3>
+          <div class="review-wrapper">
+            <div class="review-container1 row">
+            </div>
+            <p class="read-more"><span id="more" class="button">Read full Reviews</span></p>
+          </div>
       </div>
       <div class="row">
         <div class="timeseries-wrapper" style="position:relative;">
@@ -152,6 +160,108 @@
       </div>
     </div>
     <script>
+    var $el, $ps, $up, totalHeight, maxHeight,moreText, flag=0;
+      var loadHelpfulReviews = function loadHelpfulReviews(rating) {
+        var filename = "new 7.json";
+
+        $("#more").html("Read full Reviews");
+        $(".review-wrapper").css("height","300px");
+        flag=0
+        $.getJSON("./new 7.json", function(data) {
+          var data = data;
+          var selectedRating = data[0].word;
+          var wordObj = {
+            reviews: data[0].topReviews,
+            productId: data[0].productIDS,
+            helpful: data[0].rating
+          };
+          if(rating){
+            var reviewNumber = rating.Category.charAt(0);
+            var wordObj = {
+              reviews: data[reviewNumber].topReviews,
+              productId: data[reviewNumber].productIDS,
+              helpful: data[reviewNumber].rating
+            };
+          }
+
+          $(".review-container1").html("");
+          $.each(wordObj.reviews, function(key, val) {
+            var card =
+              "<div class='col-sm-3' style='padding: 0px 5px;'"+
+              "<div class='card col-sm-12''><div class='card-body' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;color:black;><h5 class='card-title' style='font-weight: bold;'>" +
+              wordObj.productId[key] +
+              "</h5><h6 class='card-subtitle mb-2'>Helpful Rating: " +
+              wordObj.helpful[key] +
+              "</h6><p class='card-text'>" +
+              val +
+              "</p></div></div></div>";
+            $(".review-container1").append(card);
+          });
+      });
+    };
+
+
+    $('body').on('click', '.read-more', function(e) {
+      console.log(e);
+      e.stopPropagation();
+      e.preventDefault();
+      totalHeight = 0;
+      maxHeight = 0;
+
+      $el = $(this).find("span");
+      $p  = $(this);
+      moreText = $el.html();
+      //read-more
+      $up = $p.parent();
+      //review-wrapper(up)
+      var arr = $up.find("p:not('.read-more')");
+
+      if(moreText == "Read full Reviews" && flag == 0){
+        flag = 1;
+        // measure how tall inside should be by adding together heights of all inside paragraphs (except read-more paragraph)
+        for(var i=0;i< arr.length ;i++){
+          if(maxHeight < arr[i].offsetHeight){
+            maxHeight = arr[i].offsetHeight;
+          }
+        }
+        totalHeight = maxHeight + 110;
+
+        $up
+          .css({
+            // Set height to prevent instant jumpdown when max height is removed
+            //"height": $up.height(),
+            "height": totalHeight,
+            "max-height": 9999
+          })
+          .animate({
+            "height": totalHeight
+          });
+        $el.html("See Less");
+        // fade out read-more
+        //$p.fadeOut('slow');
+        $p.fadeTo( 1000, 1 );
+        return false;
+      }else if(moreText == "See Less" && flag == 1){
+        flag = 0;
+        $up
+          .css({
+            // Set height to prevent instant jumpdown when max height is removed
+            //"height": $up.height(),
+            "height": $up.height(),
+            "max-height": 300
+          })
+          .animate({
+            "height": $up.height()
+          });
+        // fade out read-more
+        //$p.fadeOut('slow');
+        $p.fadeTo( 1000, 1 );
+        $el.html("Read full Reviews");
+        return false;
+      }
+    });
+    </script>
+    <script>
       var width = 520,
         height = 500,
         padding = 1.5, // separation between same-color nodes
@@ -173,7 +283,14 @@
             .selectAll("text")
             .attr("stroke", function(d) {
               if (d.text == selectedWord) {
-                return "red";
+                return "#fff";
+              } else {
+                return "black";
+              }
+            })
+            .attr("fill", function(d) {
+              if (d.text == selectedWord) {
+                return "#fff";
               } else {
                 return "black";
               }
@@ -314,9 +431,23 @@
             .attr("cursor", "pointer")
             .attr("stroke", function(d) {
               if (d.text == selectedWord) {
-                return "red";
+                return "#fff";
               } else {
                 return "black";
+              }
+            })
+            .attr("fill", function(d) {
+              if (d.text == selectedWord) {
+                return "#fff";
+              } else {
+                return "black";
+              }
+            })
+            .attr("font-weight", function(d) {
+              if (d.text == selectedWord) {
+                return "700";
+              } else {
+                return "300";
               }
             })
             .style("text-anchor", "middle")
@@ -700,6 +831,7 @@
         bars
           .append("rect")
           .attr("class", "graph")
+          .attr("cursor", "pointer")
           .attr("y", function(d) {
             return y(d.Category) * 2;
           })
@@ -712,6 +844,12 @@
           })
           .attr("width", function(d) {
             return x(d.Average);
+          });
+
+        bars
+          .on("click", function(d) {
+            //document.getElementById('#more').innerText = "Read full Reviews";
+            loadHelpfulReviews(d);
           });
 
         //add a value label to the right of each bar
@@ -741,6 +879,7 @@
       };
 
       function click(d) {
+        loadHelpfulReviews(null);
         loadBubbleGraph("jdld");
         d3.select("#table")
           .select("table")

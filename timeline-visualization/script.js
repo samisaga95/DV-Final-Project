@@ -2,7 +2,32 @@
 (function($, d3, moment) {
   'use strict'
 
+
+var dataset = data();
   // *** THE DATA *** //
+  function data() {
+    var arr = [];
+    d3.json("../Dataset/timeline_output.json", function(data) {
+      for (var dt in data) {
+        arr.push({
+          date: dt,
+          values: data[dt],
+          float: Math.random() * 1000
+        });
+      }
+    });
+    return arr;
+  }
+
+  var interval = setInterval(function() {
+    if (dataset != null) {
+      maincall();
+      clearInterval(interval);
+    }
+  }, 1000);
+
+function maincall() {
+ /* // *** THE DATA *** //
   var dataset = function() {
     var count = 200;
 
@@ -14,7 +39,6 @@
 
     var arr = [],
       startDate = moment("2015-09-01");
-     var json = require('../Dataset/timeline_output.json');
     for (let i = 0; i < count; i++) {
       arr.push({
         date: startDate.format("YYYY-MM-DD"),
@@ -25,13 +49,15 @@
     }
 
     return arr;
-  }();
+  }();*/
 
   // *** THE COLORS / KEY *** //
   var colors = [
-    ["Pending", "#1f77b4"],
-    ["InProgress", "#2ca02c"],
-    ["Completed", "#ff7f0e"]
+    ["1", "#1f77b4"],
+      ["2", "#2ca02c"],
+      ["3", "#ff7f0e"],
+      ["4", "#FF4500"],
+      ["5", "#FFA500"]
   ];
 
   // *** SETTINGS *** //
@@ -43,8 +69,8 @@
       right: 100
     };
     var dim = {
-      width: 850,
-      height: 400
+      width: 1000,
+      height: 500
     };
 
     return {
@@ -71,7 +97,7 @@
       .domain(stacked[0].map(function(d) {
         return d.x;
       })) //pick one of the mapped arrays' x values for the domain
-      .rangeRoundBands([0, settings.dim.width]);
+      .rangeRoundBands([0, 7500]);
     var y = d3.scale.linear()
       .domain([0, d3.max(stacked[stacked.length - 1], function(d) {
         return d.y0 + d.y;
@@ -82,17 +108,17 @@
     })); //ordinal scale with the colors
 
     // *** SETUP THE CHART *** //
-    d3.select('#Tchart svg').remove() //clear out old version
-    var svg = d3.select('#Tchart')
+    d3.select('#chart svg').remove() //clear out old version
+    var svg = d3.select('#chart')
       .append("svg")
       .attr({
         'class': 'chart-wrapper',
-        width: settings.dim.width + settings.margins.left + settings.margins.right,
+        width: 7000 + settings.margins.left + settings.margins.right,
         height: settings.dim.height + settings.margins.top + settings.margins.bottom
       });
 
-    var Tchart = svg.append('g')
-      .attr('transform', 'translate(' + settings.margins.left + ',' + settings.margins.top + ')');
+    var chart = svg.append('g')
+      .attr('transform', 'translate(' + 10 + ',' + settings.margins.top + ')');
 
     // Add a group for each column.
     var valgroup = chart.selectAll("g.valgroup")
@@ -123,6 +149,7 @@
       })
       .attr("width", x.rangeBand());
 
+
     // *** ADD THE TIME SERIES BOTTOM AXIS *** //
     (function(svg, min, max, settings) {
       //setup the min and max as moment objects
@@ -143,7 +170,7 @@
       // *** SETUP THE TIME SERIES AXIS *** //
       var timeScale = d3.time.scale()
         .domain([min.toDate(), max.toDate()])
-        .range([0, settings.dim.width]);
+        .range([0, 7500]);
 
       //create the x-axis from the time scale
       var xAxis = function(timeScale, min, max) {
@@ -209,6 +236,8 @@
         translater: translater,
         callback: callback
       };
+
+      console.log(settings)
 
       //build the bar
       elements.$bar = svg.append('rect')
@@ -364,8 +393,9 @@
       var min = moment(dataset[0].date),
           max = moment(dataset[dataset.length-1].date),
           handles = {
-            size: 8
+            size: 12
           };
+
       var timeScale = d3.time.scale()
         .domain([min.toDate(), max.toDate()])
         .range([0, settings.dim.width]);
@@ -374,7 +404,7 @@
       var svg = d3.select('#controllers')
             .append('svg')
             .attr({
-              width: settings.dim.width + settings.margins.left + settings.margins.right,
+              width: 7500 + settings.margins.left + settings.margins.right,
               height: 50
             });
       var g = svg.append("g")
@@ -385,7 +415,7 @@
       g.append('line')
         .attr({
           x1: 0, y1: handles.size,
-          x2: settings.dim.width, y2: handles.size,
+          x2: 1000, y2: handles.size,
           stroke: '#ccc',
           "stroke-width": 1
         });
@@ -457,5 +487,6 @@
 
   renderSlider(dataset, settings, updateChart);
 
+  }
 
 }(jQuery, window.d3, window.moment));
