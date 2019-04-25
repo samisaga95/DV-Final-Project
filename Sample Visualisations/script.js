@@ -5,7 +5,7 @@
   // *** THE DATA *** //
   function data() {
     var arr = [];
-    d3.json("../Dataset/timeline_output.json", function(data) {
+    d3.json("./timeline_output.json", function(data) {
       for (var dt in data) {
         arr.push({
           date: dt,
