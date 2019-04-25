@@ -199,30 +199,35 @@
     <script>
     var $el, $ps, $up, totalHeight, maxHeight,moreText, flag=0;
       var loadHelpfulReviews = function loadHelpfulReviews(rating) {
-        var filename = selectedDept + ".json";
-        console.log(selectedDept);
+        //var filename = "help_"+selectedDept + "_5.json";
+        var filename = "help_Musical_Instruments_5.json";
+
         $("#more").html("Read full Reviews");
         $(".review-wrapper").css("height","300px");
         flag=0
-        $.getJSON("./new 7.json", function(data) {
+        $.getJSON(filename, function(data) {
           var data = data;
 
-          var reviewNumber = rating.Category.charAt(0) || 3;
-          var topReviews = "topReviews_"+reviewNumber;
-          var productIDS = "productIDS_"+reviewNumber;
-          var rating = "helpfulRating_" + reviewNumber;
-
+          //var reviewNumber = rating.Category.charAt(0) || 3;
+          var topReviews = "review_"+3;
+          var productIDS = "product_"+3;
+          var score = "score_" + 3;
+          var selectedData = data[0];
+          //console.log(selectedData[topReviews]);
           var wordObj = {
-            reviews: data[topReviews],
-            productId: data[productIDS],
-            helpful: data[rating]
+            reviews: selectedData[topReviews],
+            productId: selectedData[productIDS],
+            helpful: selectedData[score]
           };
           if(rating){
-
+            var reviewNumber = rating.Category.charAt(0) || 3;
+            topReviews = "review_"+reviewNumber;
+            productIDS = "product_"+reviewNumber;
+            score = "score_" + reviewNumber;
             var wordObj = {
-              reviews: data[topReviews],
-              productId: data[productIDS],
-              helpful: data[rating]
+              reviews: selectedData[topReviews],
+              productId: selectedData[productIDS],
+              helpful: selectedData[score]
             };
           }
 
@@ -230,7 +235,7 @@
           $.each(wordObj.reviews, function(key, val) {
             var card =
               "<div class='col-sm-3' style='padding: 0px 5px;'"+
-              "<div class='card col-sm-12''><div class='card-body' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;color:black;><h5 class='card-title' style='font-weight: bold;'>" +
+              "<div class='card col-sm-12''><div class='card-body' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;color:black;'>" + "<h5 class='card-title' style='font-weight: bold;'>" +
               wordObj.productId[key] +
               "</h5><h6 class='card-subtitle mt-1 mb-2'>Helpful Rating: " +
               wordObj.helpful[key] +
