@@ -162,25 +162,30 @@
     <script>
     var $el, $ps, $up, totalHeight, maxHeight,moreText, flag=0;
       var loadHelpfulReviews = function loadHelpfulReviews(rating) {
-        var filename = "new 7.json";
-
+        var filename = selectedDept + ".json";
+        console.log(selectedDept);
         $("#more").html("Read full Reviews");
         $(".review-wrapper").css("height","300px");
         flag=0
         $.getJSON("./new 7.json", function(data) {
           var data = data;
-          var selectedRating = data[0].word;
+
+          var reviewNumber = rating.Category.charAt(0) || 3;
+          var topReviews = "topReviews_"+reviewNumber;
+          var productIDS = "productIDS_"+reviewNumber;
+          var rating = "helpfulRating_" + reviewNumber;
+
           var wordObj = {
-            reviews: data[0].topReviews,
-            productId: data[0].productIDS,
-            helpful: data[0].rating
+            reviews: data[topReviews],
+            productId: data[productIDS],
+            helpful: data[rating]
           };
           if(rating){
-            var reviewNumber = rating.Category.charAt(0);
+
             var wordObj = {
-              reviews: data[reviewNumber].topReviews,
-              productId: data[reviewNumber].productIDS,
-              helpful: data[reviewNumber].rating
+              reviews: data[topReviews],
+              productId: data[productIDS],
+              helpful: data[rating]
             };
           }
 
@@ -190,7 +195,7 @@
               "<div class='col-sm-3' style='padding: 0px 5px;'"+
               "<div class='card col-sm-12''><div class='card-body' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;color:black;><h5 class='card-title' style='font-weight: bold;'>" +
               wordObj.productId[key] +
-              "</h5><h6 class='card-subtitle mb-2'>Helpful Rating: " +
+              "</h5><h6 class='card-subtitle mt-1 mb-2'>Helpful Rating: " +
               wordObj.helpful[key] +
               "</h6><p class='card-text'>" +
               val +
@@ -224,7 +229,7 @@
             maxHeight = arr[i].offsetHeight;
           }
         }
-        totalHeight = maxHeight + 110;
+        totalHeight = maxHeight + 120;
 
         $up
           .css({
