@@ -26,7 +26,7 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
   // *** THE DATA *** //
   function data() {
     var arr = [];
-    d3.json("./timeline_output.json", function(data) {
+    d3.json("./timeline_" + selectedDept + "_5.json", function(data) {
       for (var dt in data) {
         arr.push({
           date: dt,
