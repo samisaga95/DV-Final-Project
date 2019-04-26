@@ -199,7 +199,7 @@
     <script>
     var $el, $ps, $up, totalHeight, reviewNumber = 3, maxHeight,moreText, flag=0;
       var loadHelpfulReviews = function loadHelpfulReviews(rating) {
-        var filename = "help_"+selectedDept + "_5.json";
+        var filename = "../Dataset/help_"+selectedDept + "_5.json";
         //var filename = "help_Musical_Instruments_5.json";
 
         $("#more").html("Read full Reviews");
@@ -769,7 +769,7 @@
                 .attr("selected", true)
                 .style("fill", "fb0");
 
-              loadHelpfulReviews(null);
+              loadHelpfulReviews({Category: "3#", Average: "0"});
               click(d);
             });
 
