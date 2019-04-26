@@ -8,7 +8,7 @@ map_list = [{}, dict1, dict2, dict3, dict4, dict5]
 
 import glob
 
-mylist = [f for f in glob.glob('reviews_Movies*.json')]
+mylist = [f for f in glob.glob('*.json')]
 print(mylist)
 
 for inputfile in mylist:
