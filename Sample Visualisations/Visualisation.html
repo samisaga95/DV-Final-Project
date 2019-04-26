@@ -252,9 +252,11 @@
               "<div class='card col-sm-12''><div class='card-body' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;color:black;'>" +
               "<h5 class='card-title' style='font-weight: bold;'>" +
               wordObj.productId[key] +
-              "</h5><h6 class='card-subtitle mt-1 mb-2'>Helpful Rating: " +
-              wordObj.helpful[key] +
-              "</h6><p class='card-text'>" +
+              "</h5>" +
+              // "<h6 class='card-subtitle mt-1 mb-2'>Helpful Rating: " +
+              // wordObj.helpful[key] +
+              // "</h6>"+
+              "<p class='card-text'>" +
               val +
               "</p></div></div></div>";
             $(".review-container1").append(card);
@@ -769,7 +771,7 @@
                 .attr("selected", true)
                 .style("fill", "fb0");
 
-              loadHelpfulReviews({ Category: "3#", Average: "0" });
+              loadHelpfulReviews({ Category: "3#" });
               click(d);
             });
 
@@ -790,7 +792,7 @@
               return d.department.split("_")[0];
             })
             .on("click", function(d) {
-              loadHelpfulReviews(null);
+              loadHelpfulReviews({ Category: "3#" });
             });
         });
       };
@@ -929,7 +931,7 @@
       };
 
       function click(d) {
-        loadHelpfulReviews(null);
+        loadHelpfulReviews({ Category: "3#" });
         loadBubbleGraph(selectedDept);
         loadTimeSeries(jQuery, window.d3, window.moment, selectedDept);
         d3.select("#table")
