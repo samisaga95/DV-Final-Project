@@ -210,7 +210,7 @@
         moreText,
         flag = 0;
       var loadHelpfulReviews = function loadHelpfulReviews(rating) {
-        var filename = "help_" + selectedDept + "_5.json";
+        var filename = "../Dataset/UsefulRev/help_" + selectedDept + "_5.json";
         //var filename = "help_Musical_Instruments_5.json";
 
         $("#more").html("Read full Reviews");
@@ -337,7 +337,8 @@
       //         bubbleDisplay();
       //     });
       var loadBubbleGraph = function(categoryName) {
-        var filename = "output_" + categoryName + "_5.json";
+        var filename =
+          "../Dataset/BubbleChartData/output_" + categoryName + "_5.json";
         // var filename = "new 7.json";
         var onClick = function(d) {
           selectedWord = d.text;

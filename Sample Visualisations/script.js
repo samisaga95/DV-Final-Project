@@ -26,15 +26,18 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
   // *** THE DATA *** //
   function data() {
     var arr = [];
-    d3.json("./timeline_" + selectedDept + "_5.json", function(data) {
-      for (var dt in data) {
-        arr.push({
-          date: dt,
-          values: data[dt],
-          float: Math.random() * 1000
-        });
+    d3.json(
+      "../DataSet/TimeLineData/timeline_" + selectedDept + "_5.json",
+      function(data) {
+        for (var dt in data) {
+          arr.push({
+            date: dt,
+            values: data[dt],
+            float: Math.random() * 1000
+          });
+        }
       }
-    });
+    );
     return arr;
   }
 
