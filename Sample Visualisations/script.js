@@ -1,11 +1,32 @@
-(function($, d3, moment) {
+var loadTimeSeries = function($, d3, moment, selectedDept) {
   "use strict";
   console.log("Entering");
+  console.log(selectedDept);
+  d3.select("#controllers")
+    .select("rect")
+    .remove();
+
+  d3.select("#controllers")
+    .selectAll("ellipse")
+    .remove();
+
+  d3.select("#controllers")
+    .selectAll("text")
+    .remove();
+
+  d3.select("#controllers")
+    .selectAll("line")
+    .remove();
+
+  d3.select("#controllers")
+    .selectAll("svg")
+    .remove();
+
   var dataset = data();
   // *** THE DATA *** //
   function data() {
     var arr = [];
-    d3.json("./timeline_output.json", function(data) {
+    d3.json("./TimeLineData/timeline_output.json", function(data) {
       for (var dt in data) {
         arr.push({
           date: dt,
@@ -99,8 +120,7 @@
         .append("svg")
         .attr({
           class: "chart-wrapper",
-          width:
-            7000 + settings.margins.left + settings.margins.right,
+          width: 7000 + settings.margins.left + settings.margins.right,
           height:
             settings.dim.height + settings.margins.top + settings.margins.bottom
         });
@@ -257,7 +277,7 @@
           .style("text-anchor", "end")
           .text("Review Count")
           .style("fill", "white");
-      })(svg,dataset[0].date, dataset[dataset.length - 1].date, settings);
+      })(svg, dataset[0].date, dataset[dataset.length - 1].date, settings);
 
       d3.select(".chart-wrapper")
         .selectAll("text")
@@ -472,10 +492,10 @@
         });
 
       var min = moment(dataset[0].date),
-          max = moment(dataset[dataset.length-1].date),
-          handles = {
-            size: 12
-          };
+        max = moment(dataset[dataset.length - 1].date),
+        handles = {
+          size: 12
+        };
 
       var timeScale = d3.time
         .scale()
@@ -487,8 +507,7 @@
         .select("#controllers")
         .append("svg")
         .attr({
-          width:
-            1000 + settings.margins.left + settings.margins.right,
+          width: 1000 + settings.margins.left + settings.margins.right,
           height: 50
         });
       var g = svg
@@ -584,4 +603,4 @@
 
     renderSlider(dataset, settings, updateChart);
   }
-})(jQuery, window.d3, window.moment);
+};
