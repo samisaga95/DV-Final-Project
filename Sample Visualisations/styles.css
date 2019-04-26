@@ -242,6 +242,7 @@ circle {
   /*background-color: #444;*/
   min-height: 60px;
   color: #fff;
+  margin: 0;
 }
 .review-wrapper{
   max-height: 275px;
