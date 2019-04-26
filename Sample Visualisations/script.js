@@ -1,7 +1,7 @@
 var loadTimeSeries = function($, d3, moment, selectedDept) {
   "use strict";
-  console.log("Entering");
-  console.log(selectedDept);
+//  console.log("Entering");
+//  console.log(selectedDept);
   d3.select("#controllers")
     .select("rect")
     .remove();
@@ -48,7 +48,6 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
     }
   }, 1000);
 
-  console.log(dataset);
   function maincall() {
     // *** THE COLORS / KEY *** //
     var colors = [
@@ -214,16 +213,6 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
             tickStep = Math.ceil(duration.days() / 10);
           }
 
-          console.log(
-            "date interval: ",
-            { min: min, max: max },
-            {
-              months: duration.asMonths(),
-              weeks: duration.asWeeks(),
-              days: duration.asDays()
-            },
-            { interval: tickInterval, step: tickStep, format: tickFormat }
-          );
 
           return d3.svg
             .axis()
@@ -290,7 +279,6 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
     }; // end renderChart //
 
     var renderSlider = function(dataset, settings, callback) {
-      console.log(dataset);
 
       var RangeSlider = function(
         svg,
@@ -554,7 +542,7 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
         callback
       );
 
-      console.log("slider", slider);
+//      console.log("slider", slider);
 
       //setup handle dragging
       slider.elements.$min.call(
