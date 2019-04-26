@@ -337,8 +337,8 @@
       //         bubbleDisplay();
       //     });
       var loadBubbleGraph = function(categoryName) {
-        // var filename = "output_"+ categoryName + "_5.json";
-        var filename = "new 7.json";
+        var filename = "output_" + categoryName + "_5.json";
+        // var filename = "new 7.json";
         var onClick = function(d) {
           selectedWord = d.text;
 
@@ -367,12 +367,15 @@
 
           $(".review-container").html("");
           $.each(d.reviews, function(key, val) {
+            console.log(d);
             var card =
               "<div class='card' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;'><div class='card-body'><h5 class='card-title' style='font-weight: bold;'>" +
               d.productId[key] +
-              "</h5><h6 class='card-subtitle mb-2'>Rating: " +
-              d.rating[key] +
-              "</h6><p class='card-text'>" +
+              "</h5>" +
+              // "<h6 class='card-subtitle mb-2'>Rating: " +
+              // d.rating[key] +
+              // "</h6>"+
+              "<p class='card-text'>" +
               val +
               "</p></div></div>";
             $(".review-container").append(card);
@@ -399,7 +402,7 @@
             productId: data[0].productIDS,
             radius: data[0].frequency * 1,
             text: data[0].word,
-            rating: data[0].rating,
+            // rating: data[0].ratings,
             productIDS: data[0].productIDS,
             x: 0,
             y: 0
@@ -536,7 +539,7 @@
                 reviews: data[node_counter].topReviews,
                 radius: data[node_counter].frequency * multiplier,
                 text: data[node_counter].word,
-                rating: data[node_counter].rating,
+                // rating: data[node_counter].ratings,
                 productId: data[node_counter].productIDS,
                 x:
                   Math.cos((i / m) * 2 * Math.PI) * 200 +
