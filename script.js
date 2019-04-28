@@ -1,7 +1,7 @@
 var loadTimeSeries = function($, d3, moment, selectedDept) {
   "use strict";
-//  console.log("Entering");
-//  console.log(selectedDept);
+  //  console.log("Entering");
+  //  console.log(selectedDept);
   d3.select("#controllers")
     .select("rect")
     .remove();
@@ -27,7 +27,7 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
   function data() {
     var arr = [];
     d3.json(
-      "../DataSet/TimeLineData/timeline_" + selectedDept + "_5.json",
+      "./DataSet/TimeLineData/timeline_" + selectedDept + "_5.json",
       function(data) {
         for (var dt in data) {
           arr.push({
@@ -213,7 +213,6 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
             tickStep = Math.ceil(duration.days() / 10);
           }
 
-
           return d3.svg
             .axis()
             .orient("bottom")
@@ -279,7 +278,6 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
     }; // end renderChart //
 
     var renderSlider = function(dataset, settings, callback) {
-
       var RangeSlider = function(
         svg,
         width,
@@ -542,7 +540,7 @@ var loadTimeSeries = function($, d3, moment, selectedDept) {
         callback
       );
 
-//      console.log("slider", slider);
+      //      console.log("slider", slider);
 
       //setup handle dragging
       slider.elements.$min.call(

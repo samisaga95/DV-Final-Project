@@ -1,1 +1,1 @@
-<?php include_once("./Sample Visualisations/Visualisation.html")?>
+<?php include_once("./index.html")?>

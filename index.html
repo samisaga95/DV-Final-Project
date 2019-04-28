@@ -210,7 +210,7 @@
         moreText,
         flag = 0;
       var loadHelpfulReviews = function loadHelpfulReviews(rating) {
-        var filename = "../Dataset/UsefulRev/help_" + selectedDept + "_5.json";
+        var filename = "./Dataset/UsefulRev/help_" + selectedDept + "_5.json";
 
         $("#more").html("Read full Reviews");
         $(".review-wrapper").css("height", "300px");
@@ -250,7 +250,6 @@
               "<h5 class='card-title' style='font-weight: bold;'>" +
               wordObj.productId[key] +
               "</h5>" +
-
               "<p class='card-text'>" +
               val +
               "</p></div></div></div>";
@@ -323,7 +322,7 @@
 
       var loadBubbleGraph = function(categoryName) {
         var filename =
-          "../Dataset/BubbleChartData/output_" + categoryName + "_5.json";
+          "./Dataset/BubbleChartData/output_" + categoryName + "_5.json";
         var onClick = function(d) {
           selectedWord = d.text;
 
@@ -351,7 +350,6 @@
               "<div class='card' style='width: 100%;margin : 0.5rem 0;background-color: #ffba00;'><div class='card-body'><h5 class='card-title' style='font-weight: bold;'>" +
               d.productId[key] +
               "</h5>" +
-
               "<p class='card-text'>" +
               val +
               "</p></div></div>";
